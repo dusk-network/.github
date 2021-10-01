@@ -1,6 +1,6 @@
 # Events
 
-##Conferences
+## Conferences
 
 If you eyed an event or a conference you wanna join let us know! If it is deemed beneficial to the organisation, we will pay for your admission fee. If you are a presenter, we will pay also your travel and accommodation. When invited, we tend to go for every event happening in Europe. For other continents, we will consider the importance of the event.
 

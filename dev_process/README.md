@@ -18,9 +18,7 @@ Intimately related to the previous point, commits on the draft PR must happen fr
 
 It is common to be tempted to first verify assumptions about a problem on your own, and only then tell your teammates about where the problem is. _Don't!_ It is much more productive to communicate your suspicions first, and then verify them.
 
-{% hint style="warning" %}
-Sometimes it might not be possible to push frequently \(i.e. when someone's debugging\). In this case, make sure to add comments to your PR with your findings
-{% endhint %}
+> :warning: Sometimes it might not be possible to push frequently \(i.e. when someone's debugging\). In this case, make sure to add comments to your PR with your findings
 
 ### Set PR Ready For Review
 
@@ -32,8 +30,8 @@ PR ready for reviews should be cleared as soon as possible. Make sure to **menti
 
 Priorities is set on the board. However, some items should always be prioritized before the others. From a general perspective, following priority list is always valid
 
-1. [Blockers](development-guidelines.md#blockers-and-how-to-deal-with-them)
-2. [PR Reviews](development-guidelines.md#pr-reviews)
+1. [Blockers](#blockers-and-how-to-deal-with-them)
+2. [PR Reviews](#pr-reviews)
 3. Other issues     &lt;--- These items are normally the object of planning
 
 ### Blockers \(and how to deal with them\)
@@ -46,9 +44,7 @@ In order to do that, we need a set of both proactive and reactive measures to av
 
 #### Work Together More
 
-{% hint style="warning" %}
-There must be **at least 2 people** clearing out a blocker. Even if there is no way to divide the work, pairing is not possible and they must duplicate their efforts
-{% endhint %}
+> :warning: There must be **at least 2 people** clearing out a blocker. Even if there is no way to divide the work, pairing is not possible and they must duplicate their efforts
 
 #### Break Blockers Down
 
@@ -68,9 +64,7 @@ Reviews are higher priority than working on the issues, with the sole exception 
 
 Although everybody can organize the work however they feel more production, there is a time frame when everybody working must be online.
 
-{% hint style="info" %}
-Everybody must be online from 11:30 until 12:30 and then from 14.00 until 17.00 \(GMT+1\) during the work week. This time space is called the _Overlap_ 
-{% endhint %}
+> :information_source: Everybody must be online from 11:30 until 12:30 and then from 14.00 until 17.00 \(GMT+1\) during the work week. This time space is called the _Overlap_ 
 
 ### Communicate Often
 

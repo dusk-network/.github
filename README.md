@@ -45,9 +45,9 @@ Communication extends outside of talking and chatting (which is also something t
 
 - [We are a remote company](/working_remotely/)
 - [Working together](/working_together/)
-- [Contributing to the codebase](/contributing/)
+- [Contributing to the codebase](https://github.com/dusk-network/org/blob/master/CONTRIBUTING.md)
 - [Code Reviews](/code_reviews/)
-- [Events](/hevents/)
+- [Events](/howto_events/)
 
 ## Technology-Specific Development Guidelines
 
