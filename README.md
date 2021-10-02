@@ -10,5 +10,5 @@ This is the repo that contains the default _Community health files_. According t
 
 ## Changing these templates
 
-It is possible to change any of the health files through the normal process of opening an [issue](issues), submitting a [Pull Request](pulls) for review, and merging it on the `main` branch when approved by the reviewers
+It is possible to change any of the health files through the normal process of opening an [issue](/../../issues), submitting a [Pull Request](/../../pulls) for review, and merging it on the `main` branch when approved by the reviewers
 
