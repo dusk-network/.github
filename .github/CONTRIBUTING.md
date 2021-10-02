@@ -8,7 +8,7 @@ There are opportunities to contribute to Dusk Network at any level. It doesn't m
 
 ## Conduct
 
-All projects within the Dusk Network organisation adhere to the [Code of Conduct](/CODE_OF_CONDUCT.md). This describes the _minimum_ behavior expected from all contributors.
+All projects within the Dusk Network organisation adhere to the [Code of Conduct](./CODE_OF_CONDUCT.md). This describes the _minimum_ behavior expected from all contributors.
 
 ## Contributing
 
