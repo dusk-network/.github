@@ -223,7 +223,7 @@ After moving the PR out of the `Draft` stage, **avoid squashing commits, includi
 
 ## Reviewing Pull Requests
 
-At Dusk Network we harvest a **strong code-review culture**. Please refer to [this document](/code_reviews/) to know how to properly do code-reviews.
+At Dusk Network we harvest a **strong code-review culture**.
 
 ## Releasing
 
