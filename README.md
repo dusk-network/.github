@@ -1,57 +1,14 @@
-# Dusk Network Guidelines
+# Dusk Network Default Health Files
 
-## About This Document 
+## What is this?
 
-This document was created for new people joining Dusk Network. We’ve been growing as an organization for quite a while already, and throughout this time we’ve created quite a unique company culture. This set of guidelines focus on the values, philosophy and approach that shape our culture. We hope it will guide you through your first months with us and help with your journey.
+This is the repo that contains the default _Community health files_. According to the [GitHub documentation](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file), health files are default files that help all repositories in the `Dusk Network` organization stay consistent and follow best practices. GitHub will use and display default files for any repository owned by the account that does not have its own file of that type in any of the following places:
 
-This document is a perennial work-in-progress which goal is to provide a quick, and more importantly, unified reference for developing software in the [Dusk Network](/about/) organisation. It is a collection of different guidelines, grouped by topic, which aim to provide aid to developers during the entire process of software development, and create a **positive collective experience** even when facing the hard challenges that litter the journey of developing cutting edge technology.
+- Repository's `root`
+- The `.github` folder
+- The `docs` folder
 
-In general, strive to follow the guidelines with positive criticism. Ask when in doubt, and edit them when appropriate. Use the normal PR and RFC system to amend them.
+## Changing these templates
 
-## Where To Start
-
-This guide will help you get started. **Do not let any of the guidelines intimidate you**. They should be considered a map to help you navigate the process.
-
-Following are the primary resources to get you started:
-
-[IM System]: https://chat.dusk,network
-[Dusk Network]: https://dusk.network
-[Organization Info ]: https://github.com/dusk-network/org
-[Contribution Guidelines]: https://github.com/dusk-network/org/blob/master/CONTRIBUTING.md
-
-### A note on the language
-
-- *Avoid* means don't do something unless you have good reason.
-- *Don't* means there's never a good reason to do that thing.
-- *Prefer* indicates a better option and its alternative to watch out for.
-- *Use* is a positive instruction.
-
-### General guidelines
-
-Following points apply regardless of the technology:
-
-- Don't duplicate the functionality of a built-in library.
-- Don't ignore errors and exceptions, or *fail silently*.
-- Avoid premature optimisations, especially performance-wise.
-- Don't work on performance improvement without a benchmark.
-- Avoid scope creeping.
-- Keep the code simple.
-
-## We are a communication driven organisation that creates software
-
-Communication should be the number one priority of everyone within Dusk Network. The technology stack we use and maintain is quite complex and extensive. This means that we need to take any chance we are offered to remain up to speed with progress from our teammates, and to share our own knowledge.
-
-Communication extends outside of talking and chatting (which is also something that is VERY encouraged within Dusk Network) through:
-
-- [We are a remote company](/working_remotely/)
-- [Working together](/working_together/)
-- [Contributing to the codebase](/contributing/)
-- [Code Reviews](/code_reviews/)
-- [Events](/hevents/)
-
-## Technology-Specific Development Guidelines
-
-- [Golang]()
-- [Rust]()
-- [Web Development]()
+It is possible to change any of the health files through the normal process of opening an [issue](issues), submitting a [Pull Request](pulls) for review, and merging it on the `main` branch when approved by the reviewers
 
