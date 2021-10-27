@@ -62,7 +62,7 @@ Note that multiple commits often get squashed when they are landed (see the note
 
 #### 👉 Commit message guidelines
 
-A good commit message should describe what changed and why.
+Inspired by the [great article of Chris Beam over the importance of keeping a clean commit message history](https://chris.beams.io/posts/git-commit/), a good commit message should describe what changed and why.
 
 1. The first line should:
 
