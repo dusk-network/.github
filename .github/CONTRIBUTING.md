@@ -62,7 +62,9 @@ Note that multiple commits often get squashed when they are landed (see the note
 
 #### 👉 Commit message guidelines
 
-Inspired by the [great article of Chris Beam over the importance of keeping a clean commit message history](https://chris.beams.io/posts/git-commit/), a good commit message should describe what changed and why.
+A good commit message should describe what changed and why.
+
+> 💡 The commit message structure has been inspired by this [great article of Chris Beam over the importance of keeping a clean commit message history](https://chris.beams.io/posts/git-commit/). Make sure to read it!
 
 1. The first line should:
 
