@@ -83,8 +83,8 @@ A good commit message should describe what changed and why.
 
    Examples:
 
-   - `Fixes: #1337`
-   - `See also: #1234, #5678`
+   - `Fixes #1337`
+   - `See also #1234, #5678`
 
 **Sample Complete Commit Message**
 
@@ -108,8 +108,8 @@ A good commit message should describe what changed and why.
 #
 # If you use an issue tracker, put references to them at the bottom:
 #
-# Resolves: #123
-# See also: #456, #789
+# Resolves #123
+# See also #456, #789
 ```
 
 ## Pull Request Lifecycle
