@@ -2,7 +2,7 @@
 name: Specs
 about: Issues related to the creation and maintenance of specifications
 title: ''
-labels: team:Boris, type:docs
+labels: type:docs
 assignees: ''
 
 ---
