@@ -120,7 +120,7 @@ The process for opening and reviewing a Pull Request is similar to that of openi
 
 ### 👉 Open a Draft PR ASAP 
 
-In order for people to prevent or help [learing out blockers as soon as possible, it is paramount for them to be familiar and be able to follow the code under development. This is impossible if PRs are created as a last step before pushing commits.
+In order for people to prevent or help clearing out blockers as soon as possible, it is paramount for them to be familiar and be able to follow the code under development. This is impossible if PRs are created as a last step before pushing commits.
 
 Therefore, **as soon as you create the feature branch, it is good practice to open a PR in `Draft`**.
 
