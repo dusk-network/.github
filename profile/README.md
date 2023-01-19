@@ -4,7 +4,7 @@
 <a href="https://dusk.network/">
   <p align="center">
     <picture>
-      <source srcset="dusk-banner.png">      
+      <source srcset="https://raw.githubusercontent.com/dusk-network/.github/main/profile/dusk-banner.png">
       <img alt="Dusk Network">
     </picture>
   </p>
