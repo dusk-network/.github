@@ -65,7 +65,7 @@ If you wish to contribute to the Dusk Network please have a look to our [guideli
 
 Resources:
 - [Dusk Wiki](https://wiki.dusk.network/): the guide for the Dusk Network team members
-- [Dusk Index](https://github.com/dusk-network/doc-index): guide to Dusk documentation and repositories
+- [Dusk Index](https://github.com/dusk-network/dusk-index): guide to Dusk documentation and repositories
 
 ---
 ## Follow us
