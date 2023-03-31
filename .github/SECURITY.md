@@ -1,7 +1,7 @@
 # Reporting Security Vulnerabilities
 Dusk Network values the security and integrity of our open-source software libraries and strives to provide a secure experience for our users and partners. As part of our commitment to security, we have established a Coordinated Vulnerability Disclosure (CVD) process to ensure that any potential vulnerabilities in our technology are responsibly and promptly addressed.
 
-If you discover a potential vulnerability in any of our software libraries, please follow these guidelines below to report it to using GitHub’s vulnerability reporting feature:
+If you discover a potential vulnerability in any of our software libraries, please follow these guidelines below to report it using GitHub’s vulnerability reporting feature:
 
 1. Do not publicly disclose the vulnerability or exploit it.
 2. Navigate to the main page of the affected repository on GitHub.com.
