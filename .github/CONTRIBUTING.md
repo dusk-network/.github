@@ -37,6 +37,7 @@ When opening a new issue in the repository's issue tracker, users will be presen
 - [Bug Report](../.github/ISSUE_TEMPLATE/bug_report.md): Use this template for reporting problems related to existing code that does not do what it is intended.
 - [Feature Request](../.github/ISSUE_TEMPLATE/feature_request.md): Use this template for requesting the development of code not yet existing, either to create new functionalities, or to modify existing ones.
 - [Specification Request](../.github/ISSUE_TEMPLATE/specs.md): Use this template for requesting the creation of documentation to specify new or existing features.
+- [Generic Issue](../.github/ISSUE_TEMPLATE/generic_issue.md): Use this template for issues that don't fit into other categories.
 
 Do not worry if you cannot answer every detail in the template, just fill in what you can.
 
