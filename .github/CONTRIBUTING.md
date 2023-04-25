@@ -6,7 +6,7 @@ There are opportunities to contribute to Dusk Network at any level. It doesn't m
 
 **No contribution is too small and all contributions are valued.**
 
-## Conduct
+## Code of Conduct
 
 All projects within the Dusk Network organisation adhere to the [Code of Conduct](./CODE_OF_CONDUCT.md). This describes the _minimum_ behavior expected from all contributors.
 
@@ -30,7 +30,7 @@ If you have reviewed existing documentation and still have questions or are havi
 
 In exchange for receiving help, we ask that you contribute back a documentation PR that helps others avoid the problems that you encountered.
 
-### Submitting a new Issue
+### Submitting a New Issue
 
 When opening a new issue in the repository's issue tracker, users will be presented with different templates that should be filled in. Following are the issue templates that one should follow:
 
@@ -49,7 +49,7 @@ See [How to create a Minimal, Complete, and Verifiable example](https://stackove
 
 ## Resolving Issues
 
-### Work on a feature branch
+### Work on a Feature Branch
 
 If you are working on an issue, you should work on a **feature branch**. Call the feature branch in a way that it clearly points to the issue it refers to (`feature-[issue_nr]` is a safe choice). Also, make sure to push your feature branch to the `remote` repository.
 
@@ -61,7 +61,7 @@ That said, if you have a number of commits that are "checkpoints" and don't repr
 
 Note that multiple commits often get squashed when they are landed (see the notes about [commit squashing](#commit-squashing)).
 
-#### 👉 Commit message guidelines
+#### 👉 Commit Message Guidelines
 
 A good commit message should describe what changed and why.
 
@@ -135,7 +135,7 @@ Other than that, please follow these guidelines in handling your PRs:
 - Do not open PRs that are not linked or related to a previously opened issue.
 - Update the `Unreleased` section of the `CHANGELOG` if your PR includes anything that's worth mentioning in there. Avoid adding things like doc-nitpicks and similar changes which do not affect directly any added, fixed, removed or changed feature.
 
-### Set PR To Ready For Review
+### Set PR To Ready for Review
 
 When you are done with your PR, change it from _draft_ to _ready for review._ 
 
@@ -147,13 +147,13 @@ Pull Requests are the way concrete changes are made to the code, documentation, 
 
 If the change being proposed alters code (as opposed to only documentation for example), it is either adding new functionality to a crate or it is fixing existing, broken functionality. In both of these cases, the pull request should include one or more tests to ensure that the crate does not regress in the future. There are two ways to write tests: integration tests and documentation tests (we strive to avoid unit tests as much as possible).
 
-#### Integration tests
+#### Integration Tests
 
 Integration tests go in the same space as the code they are testing. For `rust` repositories, this is the crate (in which case each sub crate should have a `dev-dependency` on the main crate itself. This makes all utilities available to use in tests, no matter the crate being tested).
 
 The best strategy for writing a new integration test is to look at existing integration tests in the crate and follow the style.
 
-#### Documentation tests
+#### Documentation Tests
 
 Ideally, every API has at least one [documentation test] that demonstrates how to use the API. In `rust`, documentation tests are run with `cargo test --doc`. This ensures that the example is correct and provides additional test coverage.
 
@@ -208,7 +208,7 @@ Lines that start with `/// #` are removed when the documentation is generated. T
 /// # }
 ```
 
-### Discuss and update
+### Discuss and Update
 
 You will probably get feedback or requests for changes to your Pull Request. This is a big part of the submission process so don't be discouraged! Some contributors may sign off on the Pull Request right away, others may have
 more detailed comments or feedback. This is a necessary part of the process in order to evaluate whether the changes are correct and necessary.
@@ -218,7 +218,7 @@ Keep an eye out for comments from code owners to provide guidance on conflicting
 
 **Once the PR is open, do not rebase the commits**. See [Commit Squashing](#commit-squashing) for more details.
 
-### Commit Squashing
+### Commit Squashing Guidelines
 
 When a PR is in `Draft` it is possible to squash the commits in the PR to make the job of the reviewer easier (as long as the commits follow the [Commits](#Commits) guideline). 
 
