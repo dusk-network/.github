@@ -58,7 +58,7 @@ It is a recommended best practice to keep your changes as logically grouped as p
 
 That said, if you have a number of commits that are "checkpoints" and don't represent a single logical change, please squash those together.
 
-Note that multiple commits often get squashed when they are landed (see the notes about [commit squashing]).
+Note that multiple commits often get squashed when they are landed (see the notes about [commit squashing](#commit-squashing)).
 
 #### 👉 Commit message guidelines
 
@@ -79,7 +79,7 @@ A good commit message should describe what changed and why.
 
 3. Wrap all other lines at 72 columns (except for long URLs). Bullet points are fine (typically a hyphen or asterisk is used for the bullet preceded by a single space, with blank lines in between)
 
-4. If your patch fixes an open issue, you can add a reference to it at the end of the log. Use the `Fixes: #` or `Resolves: #`  prefix and the issue number. For other references use `See also: #`. `  which may include multiple issues, separated by a comma.
+4. If your patch fixes an open issue, you can add a reference to it at the end of the log. Use the `Fixes: #` or `Resolves: #`  prefix and the issue number. For other references use `See also: #`, which may include multiple issues, separated by a comma.
 
    Examples:
 
@@ -120,7 +120,7 @@ The process for opening and reviewing a Pull Request is similar to that of openi
 
 ### 👉 Open a Draft PR ASAP 
 
-In order for people to prevent or help clearing out blockers as soon as possible, it is paramount for them to be familiar and be able to follow the code under development. This is impossible if PRs are created as a last step before pushing commits.
+In order for people to prevent or help clearing out blockers as soon as possible, it is paramount for them to be familiar with and able to follow the code under development. This is impossible if PRs are created as a last step before pushing commits.
 
 Therefore, **as soon as you create the feature branch, it is good practice to open a PR in `Draft`**.
 
@@ -130,11 +130,11 @@ Other than that, please follow these guidelines in handling your PRs:
 
 - Keep your PRs in`Draft` until they are ready to be reviewed.
 - Be descriptive in the titles of your PRs and also provide good descriptions about which things are being added, changed, fixed or removed also addressing the corresponding issue that it is addressing to.
-- Any pull request that it's not passing our CI tests & builds will not be merged. This implies incorrect formatting errors, compilation errors, clippy lints, or any other kind of inconsistency with your code.
+- Any pull request that is not passing our CI tests & builds will not be merged. This implies incorrect formatting errors, compilation errors, clippy lints, or any other kind of inconsistency with your code.
 - Do not open PRs that are not linked or related to a previously opened issue.
-- Update the `Unreleased` section of the `CHANGELOG` if your PR includes anything that it's worth to be noticed in there. Avoid adding things like doc-nitpicks and similar changes which do not affect directly any added, fixed, removed or changed feature.
+- Update the `Unreleased` section of the `CHANGELOG` if your PR includes anything that's worth mentioning in there. Avoid adding things like doc-nitpicks and similar changes which do not affect directly any added, fixed, removed or changed feature.
 
-### Set PR Ready For Review
+### Set PR To Ready For Review
 
 When you are done with your PR, change it from _draft_ to _ready for review._ 
 
@@ -144,7 +144,7 @@ Pull Requests are the way concrete changes are made to the code, documentation, 
 
 ### Tests
 
-If the change being proposed alters code (as opposed to only documentation for example), it is either adding new functionality to a crate or it is fixing existing, broken functionality. In both of these cases, the pull request should include one or more tests to ensure that the crate does not regress in the future. There are two ways to write tests: integration tests and documentation tests (We strive to avoid unit tests as much as possible).
+If the change being proposed alters code (as opposed to only documentation for example), it is either adding new functionality to a crate or it is fixing existing, broken functionality. In both of these cases, the pull request should include one or more tests to ensure that the crate does not regress in the future. There are two ways to write tests: integration tests and documentation tests (we strive to avoid unit tests as much as possible).
 
 #### Integration tests
 
