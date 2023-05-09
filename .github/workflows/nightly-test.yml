@@ -1,0 +1,16 @@
+on:
+  workflow_call:
+
+name: Nightly Tests
+
+jobs:
+  nightly_tests:
+    name: Nightly tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --release
