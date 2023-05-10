@@ -9,12 +9,29 @@ on: [pull_request, push]
 name: Dusk CI
 
 jobs:
+  # Import the localized workflow
   analyze:
     name: Code Analysis
     uses: ./.github/workflows/code-analysis.yml
 
+  # It's possible to import workflows from elsewhere
+  # that have been marked as `on: workflow_call:`
   test:
     name: Nightly tests
-    uses: ./.github/workflows/nightly-test.yml
+    uses: https://github.com/dusk-network/.github/.github/workflows/nightly-test.yml
+
+  # It's still possible to introduce your own jobs if
+  # the workflows specified above do not fit your repos
+  # complexities.
+  test_nightly_no_std:
+      name: Nightly tests no_std
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - uses: dtolnay/rust-toolchain@nightly
+          with:
+            components: clippy
+        - uses: Swatinem/rust-cache@v2
+        - run: cargo test --release --no-default-features
 
 ```
