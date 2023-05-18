@@ -4,19 +4,9 @@ on:
 name: Code Analysis
 
 jobs:
-  dusk_analyzer:
-    name: Dusk Analyzer
-    runs-on: [self-hosted]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@nightly
-      - run: cargo install --git https://github.com/dusk-network/cargo-dusk-analyzer
-      - uses: Swatinem/rust-cache@v2
-      - run: cargo dusk-analyzer
-
   rustfmt:
     name: Rust Format
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@nightly
@@ -27,7 +17,7 @@ jobs:
 
   clippy:
     name: Clippy Check
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@nightly

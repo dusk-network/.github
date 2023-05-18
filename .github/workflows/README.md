@@ -9,29 +9,36 @@ on: [pull_request, push]
 name: Dusk CI
 
 jobs:
-  # Import the localized workflow
+  # Import the reusable workflow to use Clippy and Rustfmt
   analyze:
     name: Code Analysis
-    uses: ./.github/workflows/code-analysis.yml
+    uses: dusk-network/.github/.github/workflows/code-analysis.yml@main
 
-  # It's possible to import workflows from elsewhere
-  # that have been marked as `on: workflow_call:`
-  test:
-    name: Nightly tests
-    uses: https://github.com/dusk-network/.github/.github/workflows/nightly-test.yml
+  # Import the Dusk analyzer workflow to check for license markings etc.
+  analyze:
+    name: Dusk Analyzer
+    uses: dusk-network/.github/.github/workflows/dusk-analysis.yml@main
 
-  # It's still possible to introduce your own jobs if
-  # the workflows specified above do not fit your repos
-  # complexities.
-  test_nightly_no_std:
-      name: Nightly tests no_std
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - uses: dtolnay/rust-toolchain@nightly
-          with:
-            components: clippy
-        - uses: Swatinem/rust-cache@v2
-        - run: cargo test --release --no-default-features
+  # The `run-tests` workflow has a couple of configuration options.
+  # The defaults should be enough to run tests for release and uses
+  # the Rust nightly toolchain.
+  test_nightly_std:
+    name: Nightly release tests
+    uses: dusk-network/.github/.github/workflows/run-tests.yml@main
+
+  # The toolchain and test flags are passible though:
+  test_stable_no_std:
+    name: Stable no_std tests
+    uses: dusk-network/.github/.github/workflows/run-tests.yml@main
+    with:
+      rust_toolchain: stable
+      test_flags: --no-default-features
+
+  # In case the repository needs to enable specific features:
+  test_nightly_features:
+    name: Nightly specific features tests
+    uses: dusk-network/.github/.github/workflows/run-tests.yml@main
+    with:
+      test_flags: --features=feature1,feature2
 
 ```
