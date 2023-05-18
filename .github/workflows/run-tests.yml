@@ -20,8 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@${{ inputs.rust_toolchain }}
+      - uses: dtolnay/rust-toolchain@master
         with:
+          toolchain: ${{ inputs.rust_toolchain }}
           components: clippy
       - uses: Swatinem/rust-cache@v2
       - run: cargo test --release ${{ inputs.test_flags }}
