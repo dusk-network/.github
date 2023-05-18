@@ -1,16 +1,15 @@
 on:
   workflow_call:
 
-name: Nightly Tests
+name: Dusk Analysis
 
 jobs:
-  nightly_tests:
-    name: Nightly tests
+  dusk_analyzer:
+    name: Dusk Analyzer
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@nightly
-        with:
-          components: clippy
+      - run: cargo install --git https://github.com/dusk-network/cargo-dusk-analyzer
       - uses: Swatinem/rust-cache@v2
-      - run: cargo test --release
+      - run: cargo dusk-analyzer
