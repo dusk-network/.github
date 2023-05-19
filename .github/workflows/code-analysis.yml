@@ -1,5 +1,11 @@
 on:
   workflow_call:
+    inputs:
+      toolchain:
+        description: 'Rust toolchain version'
+        required: true
+        type: string
+        default: nightly
 
 name: Code Analysis
 
@@ -9,9 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@nightly
+      - uses: dtolnay/rust-toolchain@master
         with:
-          components: rustfmt 
+          components: rustfmt
+          toolchain: ${{ inputs.toolchain }}
       - uses: Swatinem/rust-cache@v2
       - run: cargo fmt --all -- --check
 
@@ -20,8 +27,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@nightly
-        with:
-          components: clippy
       - uses: Swatinem/rust-cache@v2
       - run: cargo clippy --all-features --release -- -D warnings

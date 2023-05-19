@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@nightly
       - run: cargo install --git https://github.com/dusk-network/cargo-dusk-analyzer
       - uses: Swatinem/rust-cache@v2
       - run: cargo dusk-analyzer
