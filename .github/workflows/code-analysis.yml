@@ -18,6 +18,7 @@ jobs:
         with:
           components: rustfmt
           toolchain: ${{ inputs.toolchain }}
+      - run: rustup override set ${{ inputs.toolchain }}
       - uses: Swatinem/rust-cache@v2
       - run: |
           if [ "${{ inputs.toolchain }}" == "nightly" ]; then
