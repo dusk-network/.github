@@ -19,7 +19,12 @@ jobs:
           components: rustfmt
           toolchain: ${{ inputs.toolchain }}
       - uses: Swatinem/rust-cache@v2
-      - run: cargo fmt --all -- --check
+      - run: |
+          if [ "${{ inputs.toolchain }}" == "nightly" ]; then
+            cargo +nightly fmt --all -- --check
+          else
+            cargo fmt --all -- --check
+          fi
 
   clippy:
     name: Clippy Check
