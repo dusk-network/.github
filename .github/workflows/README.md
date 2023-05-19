@@ -10,9 +10,14 @@ name: Dusk CI
 
 jobs:
   # Import the reusable workflow to use Clippy and Rustfmt
+  # Rustfmt is ran with the nightly toolchain by default due to nice features
+  # not being stable yet. The toolchain type and version is, however, passable to the 
+  # workflow file.
   code_analysis:
     name: Code Analysis
     uses: dusk-network/.github/.github/workflows/code-analysis.yml@main
+  # with:
+  #   toolchain: stable
 
   # Import the Dusk analyzer workflow to check for license markings etc.
   dusk_analysis:
