@@ -13,11 +13,23 @@ jobs:
   # Rustfmt is ran with the nightly toolchain by default due to nice features
   # not being stable yet. The toolchain type and version is, however, passable to the 
   # workflow file.
+  #
+  # The default clippy configuration might be too strict for certain repositories.
+  # The `clippy_default` parameter is set to true and will execute:
+  # `cargo clippy --all-features --release -- -D warnings
+  #
+  # If it is set to false and an empty `clippy_args` argument is passed, 
+  # `cargo clippy` will be executed.
+  #
+  # If arguments are passed with `clippy_args` while `clippy_default` is set to
+  # false, `cargo clippy {clippy_args}` will be ran.
   code_analysis:
     name: Code Analysis
     uses: dusk-network/.github/.github/workflows/code-analysis.yml@main
   # with:
   #   toolchain: stable
+  #   clippy_default: true
+  #   clippy_args: ''
 
   # Import the Dusk analyzer workflow to check for license markings etc.
   dusk_analysis:
