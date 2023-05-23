@@ -5,6 +5,15 @@ on:
         description: 'Rust toolchain version'
         type: string
         default: nightly
+      clippy_default:
+        description: 'Use default arguments'
+        type: boolean
+        required: false
+        default: true
+      clippy_args:
+        description: 'Custom arguments for Clippy'
+        type: string
+        required: false
 
 name: Code Analysis
 
@@ -33,4 +42,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: Swatinem/rust-cache@v2
-      - run: cargo clippy --all-features --release -- -D warnings
+      - run: |
+          if [ ${{ inputs.clippy_default }} == true ]; then
+            cargo clippy --all-features --release -- -D warnings
+          elif [ -z "${{ inputs.clippy_default }}" ]; then
+            cargo clippy
+          else
+            cargo clippy ${{ inputs.clippy_args }}
+          fi
