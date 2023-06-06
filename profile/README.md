@@ -32,6 +32,11 @@ Dusk unlocks economic opportunities for all by making institutional-level financ
 [![dusk-network/rusk issues](https://img.shields.io/github/issues-raw/dusk-network/rusk)](https://github.com/dusk-network/rusk/issues)
 [![dusk-network/rusk pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/rusk)](https://github.com/dusk-network/rusk/pulls)
 
+* [`piecrust`](https://github.com/dusk-network/piecrust): Dusk's smart contract platform \
+[![dusk-network/piecrust last commit](https://img.shields.io/github/last-commit/dusk-network/piecrust)](https://github.com/dusk-network/piecrust/commits/master)
+[![dusk-network/piecrust issues](https://img.shields.io/github/issues-raw/dusk-network/piecrust)](https://github.com/dusk-network/piecrust/issues)
+[![dusk-network/piecrust pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/piecrust)](https://github.com/dusk-network/piecrust/pulls)
+
 * [`wallet-cli`](https://github.com/dusk-network/wallet-cli): Dusk wallet CLI and library\
 [![dusk-network/wallet-cli last commit](https://img.shields.io/github/last-commit/dusk-network/wallet-cli)](https://github.com/dusk-network/wallet-cli/commits/main)
 [![dusk-network/wallet-cli issues](https://img.shields.io/github/issues-raw/dusk-network/wallet-cli)](https://github.com/dusk-network/wallet-cli/issues)
@@ -41,11 +46,6 @@ Dusk unlocks economic opportunities for all by making institutional-level financ
 [![dusk-network/itn-installer last commit](https://img.shields.io/github/last-commit/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/commits/main)
 [![dusk-network/itn-installer issues](https://img.shields.io/github/issues-raw/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/issues)
 [![dusk-network/itn-installer pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/pulls)
-
-* [`dusk-ui-kit`](https://github.com/dusk-network/dusk-ui-kit): Dusk UI component library \
-[![dusk-network/dusk-ui-kit last commit](https://img.shields.io/github/last-commit/dusk-network/dusk-ui-kit)](https://github.com/dusk-network/dusk-ui-kit/commits/main)
-[![dusk-network/dusk-ui-kit issues](https://img.shields.io/github/issues-raw/dusk-network/dusk-ui-kit)](https://github.com/dusk-network/dusk-ui-kit/issues)
-[![dusk-network/dusk-ui-kit pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/dusk-ui-kit)](https://github.com/dusk-network/dusk-ui-kit/pulls)
 
 ## Libraries
 
