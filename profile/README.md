@@ -1,10 +1,10 @@
-# Welcome to Dusk Network!
+# Welcome to Dusk!
 
 <!-- Dusk Banner -->
 <a href="https://dusk.network/">
   <p align="center">
     <picture>
-      <source srcset="https://raw.githubusercontent.com/dusk-network/.github/main/profile/dusk-banner.png">
+      <source srcset="https://raw.githubusercontent.com/dusk-network/.github/main/profile/dusk_github_cover.png">
       <img alt="Dusk Network">
     </picture>
   </p>
@@ -22,7 +22,7 @@ Dusk unlocks economic opportunities for all by making institutional-level financ
 <!-- Main repos -->
 ## Main repositories
 
-* [`dusk-blockchain`](https://github.com/dusk-network/dusk-blockchain): reference implementation of the Dusk Network node\
+* [`dusk-blockchain`](https://github.com/dusk-network/dusk-blockchain): reference implementation of the Dusk node\
 [![dusk-network/dusk-blockchain last commit](https://img.shields.io/github/last-commit/dusk-network/dusk-blockchain)](https://github.com/dusk-network/dusk-blockchain/commits/master)
 [![dusk-network/dusk-blockchain issues](https://img.shields.io/github/issues-raw/dusk-network/dusk-blockchain)](https://github.com/dusk-network/dusk-blockchain/issues)
 [![dusk-network/dusk-blockchain pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/dusk-blockchain)](https://github.com/dusk-network/dusk-blockchain/pulls)
@@ -37,7 +37,7 @@ Dusk unlocks economic opportunities for all by making institutional-level financ
 [![dusk-network/wallet-cli issues](https://img.shields.io/github/issues-raw/dusk-network/wallet-cli)](https://github.com/dusk-network/wallet-cli/issues)
 [![dusk-network/wallet-cli pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/wallet-cli)](https://github.com/dusk-network/wallet-cli/pulls)
 
-* [`itn-installer`](https://github.com/dusk-network/itn-installer): installer to run a Dusk Network node for our ITN program\
+* [`itn-installer`](https://github.com/dusk-network/itn-installer): installer to run a Dusk node for our ITN program\
 [![dusk-network/itn-installer last commit](https://img.shields.io/github/last-commit/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/commits/main)
 [![dusk-network/itn-installer issues](https://img.shields.io/github/issues-raw/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/issues)
 [![dusk-network/itn-installer pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/pulls)
@@ -49,22 +49,22 @@ Dusk unlocks economic opportunities for all by making institutional-level financ
 
 ## Libraries
 
-* [`plonk`](https://github.com/dusk-network/plonk): Rust implementation of the PLONK ZKProof System, done by the Dusk Network team \
+* [`plonk`](https://github.com/dusk-network/plonk): Rust implementation of the PLONK ZKProof System, done by the Dusk team \
 [![dusk-network/plonk last commit](https://img.shields.io/github/last-commit/dusk-network/plonk)](https://github.com/dusk-network/plonk/commits/master)
 [![dusk-network/plonk issues](https://img.shields.io/github/issues-raw/dusk-network/plonk)](https://github.com/dusk-network/plonk/issues)
 [![dusk-network/plonk pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/plonk)](https://github.com/dusk-network/plonk/pulls)
 
-* [`kadcast`](https://github.com/dusk-network/kadcast): Rust implementation of the Kadcast P2P protocol, done by the Dusk Network team  \
+* [`kadcast`](https://github.com/dusk-network/kadcast): Rust implementation of the Kadcast P2P protocol, done by the Dusk team  \
 [![dusk-network/kadcast last commit](https://img.shields.io/github/last-commit/dusk-network/kadcast)](https://github.com/dusk-network/kadcast/commits/main)
 [![dusk-network/kadcast issues](https://img.shields.io/github/issues-raw/dusk-network/kadcast)](https://github.com/dusk-network/kadcast/issues)
 [![dusk-network/kadcast pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/kadcast)](https://github.com/dusk-network/kadcast/pulls)
 
 
 ## Contributing
-If you wish to contribute to the Dusk Network please have a look to our [guidelines](https://github.com/dusk-network/.github/blob/main/.github/CONTRIBUTING.md).
+If you wish to contribute to the Dusk please have a look to our [guidelines](https://github.com/dusk-network/.github/blob/main/.github/CONTRIBUTING.md).
 
 Resources:
-- [Dusk Wiki](https://wiki.dusk.network/): the guide for the Dusk Network team members
+- [Dusk Wiki](https://wiki.dusk.network/): the guide for the Dusk team members
 - [Dusk Index](https://github.com/dusk-network/dusk-index): guide to Dusk documentation and repositories
 
 ---
