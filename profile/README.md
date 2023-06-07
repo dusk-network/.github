@@ -32,7 +32,7 @@ Dusk unlocks economic opportunities for all by making institutional-level financ
 [![dusk-network/rusk issues](https://img.shields.io/github/issues-raw/dusk-network/rusk)](https://github.com/dusk-network/rusk/issues)
 [![dusk-network/rusk pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/rusk)](https://github.com/dusk-network/rusk/pulls)
 
-* [`piecrust`](https://github.com/dusk-network/piecrust): Dusk's smart contract platform \
+* [`piecrust`](https://github.com/dusk-network/piecrust): WASM virtual machine for running Dusk's smart contracts. \
 [![dusk-network/piecrust last commit](https://img.shields.io/github/last-commit/dusk-network/piecrust)](https://github.com/dusk-network/piecrust/commits/master)
 [![dusk-network/piecrust issues](https://img.shields.io/github/issues-raw/dusk-network/piecrust)](https://github.com/dusk-network/piecrust/issues)
 [![dusk-network/piecrust pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/piecrust)](https://github.com/dusk-network/piecrust/pulls)
