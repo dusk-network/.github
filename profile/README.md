@@ -65,18 +65,16 @@ If you wish to contribute to the Dusk please have a look to our [guidelines](htt
 
 Resources:
 - [Dusk Wiki](https://wiki.dusk.network/): the guide for the Dusk team members
-- [Dusk Index](https://github.com/dusk-network/dusk-index): guide to Dusk documentation and repositories
+- [Dusk Index](https://github.com/dusk-network/dusk-index): guide to Dusk documentation and repositories <!-- TODO: display this only for members -->
 
 ---
 ## Follow us
   - [LinkedIn](https://www.linkedin.com/company/dusknetwork/)
   - [Twitter](https://twitter.com/duskfoundation)
   - [YouTube](https://www.youtube.com/c/DuskNetwork)
-  <!-- - [Reddit](https://www.reddit.com/r/DuskNetwork/) Currently abandoned-->
+  - [Reddit](https://www.reddit.com/r/DuskNetwork/)
 
 
 ## Join the Dusk Network community
   - [Discord](https://discord.com/invite/dusknetwork)
   - [Telegram](https://t.me/DuskNetwork)
-
- <!-- TODO: Differentiate public/member versions -->
