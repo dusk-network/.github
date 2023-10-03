@@ -1,18 +1,18 @@
-# Contributing to Dusk Network
+# Contributing to Dusk
 
 :balloon: Thanks for your help improving the project! We are so happy to have you!
 
-There are opportunities to contribute to Dusk Network at any level. It doesn't matter if you are just getting started with Rust, Go or Sveltejs, or are the most weathered expert, we can use your help.
+There are opportunities to contribute to Dusk at any level. It doesn't matter if you are just getting started with Rust, Go or Sveltejs, or are the most weathered expert, we can use your help.
 
 **No contribution is too small and all contributions are valued.**
 
 ## Code of Conduct
 
-All projects within the Dusk Network organisation adhere to the [Code of Conduct](./CODE_OF_CONDUCT.md). This describes the _minimum_ behavior expected from all contributors.
+All projects within the Dusk organisation adhere to the [Code of Conduct](./CODE_OF_CONDUCT.md). This describes the _minimum_ behavior expected from all contributors.
 
 ## Contributing
 
-At Dusk Network we work with GitHub issue trackers. Every activity, be it a software contribution or a task of different nature that produces a concrete deliverable, is logged in a specific GitHub Issue and handled accordingly. Issues are repo specific.
+At Dusk we work with GitHub issue trackers. Every activity, be it a software contribution or a task of different nature that produces a concrete deliverable, is logged in a specific GitHub Issue and handled accordingly. Issues are repo specific.
 
 👉 **Always create and work on GitHub issues**
 
@@ -117,7 +117,7 @@ A good commit message should describe what changed and why.
 
 Issues are always resolved by opening a Pull Request. **Don't close an issue by pushing your commits directly to the `main` branch!** 
 
-The process for opening and reviewing a Pull Request is similar to that of opening and triaging issues, but carries with it a necessary review and approval workflow that ensures that the proposed changes meet the minimal quality and functional guidelines of Dusk Network.
+The process for opening and reviewing a Pull Request is similar to that of opening and triaging issues, but carries with it a necessary review and approval workflow that ensures that the proposed changes meet the minimal quality and functional guidelines of Dusk.
 
 ### 👉 Open a Draft PR ASAP 
 
@@ -141,7 +141,7 @@ When you are done with your PR, change it from _draft_ to _ready for review._
 
 PR ready for reviews should be cleared as soon as possible. Make sure to **mention** reviewers on IM when your PR is ready for review, or you are done with reviewing one. 
 
-Pull Requests are the way concrete changes are made to the code, documentation, and dependencies in the various repositories of Dusk Network. Even tiny pull requests (e.g., one character pull request fixing a typo in API documentation) are greatly appreciated. Before making a large change, it is usually a good idea to first open an issue describing the change to solicit feedback and guidance. This will increase the likelihood of the PR getting merged.
+Pull Requests are the way concrete changes are made to the code, documentation, and dependencies in the various repositories of Dusk. Even tiny pull requests (e.g., one character pull request fixing a typo in API documentation) are greatly appreciated. Before making a large change, it is usually a good idea to first open an issue describing the change to solicit feedback and guidance. This will increase the likelihood of the PR getting merged.
 
 ### Tests
 
