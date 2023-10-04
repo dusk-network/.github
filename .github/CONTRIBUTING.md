@@ -20,7 +20,7 @@ For any issue, there are fundamentally three ways an individual can contribute:
 
 1. By opening the issue for discussion: For instance, if you believe that you have uncovered a bug in a crate, creating a new issue in the appropriate repo's [issue tracker][issues] is the way to report it.
 2. By helping to triage the issue: This can be done by providing supporting details (a test case that demonstrates a bug), providing suggestions on how to address the issue, or ensuring that the issue is tagged correctly.
-3. By helping to resolve the issue: Typically this is done either in the form of demonstrating that the issue reported is not a problem after all, or more often, by opening a Pull Request that changes some bit of something in the repo in a concrete and reviewable manner.
+3. By helping to resolve the issue: Typically this is done either in the form of demonstrating that the issue reported is not a problem after all, or more often, by opening a Pull Request that changes some bit of something in the relevant repository in a concrete and reviewable manner.
 
 **Anybody can participate in any stage of contribution**. We urge you to participate in the discussion around bugs and participate in reviewing PRs.
 
