@@ -20,7 +20,7 @@ For any issue, there are fundamentally three ways an individual can contribute:
 
 1. By opening the issue for discussion: For instance, if you believe that you have uncovered a bug in a crate, creating a new issue in the appropriate repo's [issue tracker][issues] is the way to report it.
 2. By helping to triage the issue: This can be done by providing supporting details (a test case that demonstrates a bug), providing suggestions on how to address the issue, or ensuring that the issue is tagged correctly.
-3. By helping to resolve the issue: Typically this is done either in the form of demonstrating that the issue reported is not a problem after all, or more often, by opening a Pull Request that changes some bit of something in Tokio in a concrete and reviewable manner.
+3. By helping to resolve the issue: Typically this is done either in the form of demonstrating that the issue reported is not a problem after all, or more often, by opening a Pull Request that changes some bit of something in the repo in a concrete and reviewable manner.
 
 **Anybody can participate in any stage of contribution**. We urge you to participate in the discussion around bugs and participate in reviewing PRs.
 
@@ -38,12 +38,13 @@ When opening a new issue in the repository's issue tracker, users will be presen
 - [Feature Request](../.github/ISSUE_TEMPLATE/feature_request.md): Use this template for requesting the development of code not yet existing, either to create new functionalities, or to modify existing ones.
 - [Specification Request](../.github/ISSUE_TEMPLATE/specs.md): Use this template for requesting the creation of documentation to specify new or existing features.
 - [Generic Issue](../.github/ISSUE_TEMPLATE/generic_issue.md): Use this template for issues that don't fit into other categories.
+- [Epic Issue](../.github/ISSUE_TEMPLATE/epic_issue.md): Use this template for an issue of issues, describing larger scope issues we want to track.
 
 Do not worry if you cannot answer every detail in the template, just fill in what you can.
 
 The two most important pieces of information we need in order to properly evaluate the report is a description of the behavior you are seeing and a simple test case we can use to recreate the problem on our own. If we cannot recreate the issue, it becomes impossible for us to fix.
 
-In order to rule out the possibility of bugs introduced by userland code, test cases should be limited, as much as possible, to using only Tokio APIs.
+In order to rule out the possibility of bugs introduced by userland code, test cases should be limited, as much as possible, to using only internal APIs.
 
 See [How to create a Minimal, Complete, and Verifiable example](https://stackoverflow.com/help/minimal-reproducible-example).
 
@@ -159,7 +160,7 @@ Ideally, every API has at least one [documentation test] that demonstrates how t
 
 The trick to documentation tests is striking a balance between being succinct for a reader to understand and actually testing the API.
 
-The type level example for `tokio_timer::Timeout` provides a good example of a documentation test:
+The type level example for `tokio_timer::Timeout` for example, provides a good example of a documentation test:
 
 ```rust
 /// // import the `timeout` function, usually this is done
