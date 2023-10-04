@@ -1,18 +1,18 @@
-# Contributing to Dusk Network
+# Contributing to Dusk
 
 :balloon: Thanks for your help improving the project! We are so happy to have you!
 
-There are opportunities to contribute to Dusk Network at any level. It doesn't matter if you are just getting started with Rust, Go or Sveltejs, or are the most weathered expert, we can use your help.
+There are opportunities to contribute to Dusk at any level. It doesn't matter if you are just getting started with Rust, Go or Sveltejs, or are the most weathered expert, we can use your help.
 
 **No contribution is too small and all contributions are valued.**
 
 ## Code of Conduct
 
-All projects within the Dusk Network organisation adhere to the [Code of Conduct](./CODE_OF_CONDUCT.md). This describes the _minimum_ behavior expected from all contributors.
+All projects within the Dusk organisation adhere to the [Code of Conduct](./CODE_OF_CONDUCT.md). This describes the _minimum_ behavior expected from all contributors.
 
 ## Contributing
 
-At Dusk Network we work with GitHub issue trackers. Every activity, be it a software contribution or a task of different nature that produces a concrete deliverable, is logged in a specific GitHub Issue and handled accordingly. Issues are repo specific.
+At Dusk we work with GitHub issue trackers. Every activity, be it a software contribution or a task of different nature that produces a concrete deliverable, is logged in a specific GitHub Issue and handled accordingly. Issues are repo specific.
 
 👉 **Always create and work on GitHub issues**
 
@@ -20,7 +20,7 @@ For any issue, there are fundamentally three ways an individual can contribute:
 
 1. By opening the issue for discussion: For instance, if you believe that you have uncovered a bug in a crate, creating a new issue in the appropriate repo's [issue tracker][issues] is the way to report it.
 2. By helping to triage the issue: This can be done by providing supporting details (a test case that demonstrates a bug), providing suggestions on how to address the issue, or ensuring that the issue is tagged correctly.
-3. By helping to resolve the issue: Typically this is done either in the form of demonstrating that the issue reported is not a problem after all, or more often, by opening a Pull Request that changes some bit of something in Tokio in a concrete and reviewable manner.
+3. By helping to resolve the issue: Typically this is done either in the form of demonstrating that the issue reported is not a problem after all, or more often, by opening a Pull Request that changes some bit of something in the relevant repository in a concrete and reviewable manner.
 
 **Anybody can participate in any stage of contribution**. We urge you to participate in the discussion around bugs and participate in reviewing PRs.
 
@@ -39,12 +39,13 @@ When opening a new issue in the repository's issue tracker, users will be presen
 - [Specification Request](../.github/ISSUE_TEMPLATE/specs.md): Use this template for requesting the creation of documentation to specify new or existing features.
 - [Epic Issue](../.github/ISSUE_TEMPLATE/epic_issue.md): An organization level issue that progresses us towards our mission
 - [Generic Issue](../.github/ISSUE_TEMPLATE/generic_issue.md): Use this template for issues that don't fit into other categories.
+- [Epic Issue](../.github/ISSUE_TEMPLATE/epic_issue.md): Use this template for an issue of issues, describing larger scope issues we want to track.
 
 Do not worry if you cannot answer every detail in the template, just fill in what you can.
 
 The two most important pieces of information we need in order to properly evaluate the report is a description of the behavior you are seeing and a simple test case we can use to recreate the problem on our own. If we cannot recreate the issue, it becomes impossible for us to fix.
 
-In order to rule out the possibility of bugs introduced by userland code, test cases should be limited, as much as possible, to using only Tokio APIs.
+In order to rule out the possibility of bugs introduced by userland code, test cases should be limited, as much as possible, to using only internal APIs.
 
 See [How to create a Minimal, Complete, and Verifiable example](https://stackoverflow.com/help/minimal-reproducible-example).
 
@@ -118,7 +119,7 @@ A good commit message should describe what changed and why.
 
 Issues are always resolved by opening a Pull Request. **Don't close an issue by pushing your commits directly to the `main` branch!** 
 
-The process for opening and reviewing a Pull Request is similar to that of opening and triaging issues, but carries with it a necessary review and approval workflow that ensures that the proposed changes meet the minimal quality and functional guidelines of Dusk Network.
+The process for opening and reviewing a Pull Request is similar to that of opening and triaging issues, but carries with it a necessary review and approval workflow that ensures that the proposed changes meet the minimal quality and functional guidelines of Dusk.
 
 ### 👉 Open a Draft PR ASAP 
 
@@ -142,7 +143,7 @@ When you are done with your PR, change it from _draft_ to _ready for review._
 
 PR ready for reviews should be cleared as soon as possible. Make sure to **mention** reviewers on IM when your PR is ready for review, or you are done with reviewing one. 
 
-Pull Requests are the way concrete changes are made to the code, documentation, and dependencies in the various repositories of Dusk Network. Even tiny pull requests (e.g., one character pull request fixing a typo in API documentation) are greatly appreciated. Before making a large change, it is usually a good idea to first open an issue describing the change to solicit feedback and guidance. This will increase the likelihood of the PR getting merged.
+Pull Requests are the way concrete changes are made to the code, documentation, and dependencies in the various repositories of Dusk. Even tiny pull requests (e.g., one character pull request fixing a typo in API documentation) are greatly appreciated. Before making a large change, it is usually a good idea to first open an issue describing the change to solicit feedback and guidance. This will increase the likelihood of the PR getting merged.
 
 ### Tests
 
@@ -160,7 +161,7 @@ Ideally, every API has at least one [documentation test] that demonstrates how t
 
 The trick to documentation tests is striking a balance between being succinct for a reader to understand and actually testing the API.
 
-The type level example for `tokio_timer::Timeout` provides a good example of a documentation test:
+The type level example for `tokio_timer::Timeout` for example, provides a good example of a documentation test:
 
 ```rust
 /// // import the `timeout` function, usually this is done

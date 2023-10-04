@@ -5,7 +5,7 @@
   <p align="center">
     <picture>
       <source srcset="https://raw.githubusercontent.com/dusk-network/.github/main/profile/dusk_github_cover.png">
-      <img alt="Dusk Network">
+      <img alt="Dusk">
     </picture>
   </p>
 </a> 
@@ -75,6 +75,6 @@ Resources:
   - [Reddit](https://www.reddit.com/r/DuskNetwork/)
 
 
-## Join the Dusk Network community
+## Join the Dusk community
   - [Discord](https://discord.com/invite/dusknetwork)
   - [Telegram](https://t.me/DuskNetwork)
