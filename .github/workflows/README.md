@@ -54,4 +54,9 @@ jobs:
 
 ## Toolchain
 
-To set the toolchain for the workflows, specify a `rust-toolchain` or `rust-toolchain.toml` file.
+To set the toolchain for the workflows, usage of `rust-toolchain.toml` is recommended. For certain channels, toolchain components like `clippy` and `rustfmt` are not available by default. This is problematic when using the `code_analysis` workflow. The following example config is therefore recommended:
+```toml
+[toolchain]
+channel = "nightly"
+components = ["clippy", "rustfmt"]
+```
