@@ -1,0 +1,40 @@
+on:
+  workflow_call:
+    inputs:
+      codecov_token:
+        description: 'Codecov Token'
+        required: true
+        type: string
+      test_flags:
+        description: 'Additional flags for cargo test'
+        required: false
+        type: string
+        default: ''
+      toolchain:
+        description: 'Rust toolchain version'
+        type: string
+        default: nightly
+
+name: Code Coverage
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3     
+      - run: sudo apt install -y kcov
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          components: rustfmt
+          toolchain: ${{ inputs.toolchain }}
+      - run: rustup override set ${{ inputs.toolchain }}
+      - uses: Swatinem/rust-cache@v2
+      - name: Collect coverage
+        run: |
+          RUSTFLAGS='-C link-dead-code' cargo test --no-run --all-features
+          find target/debug/deps -type f -executable ! -name "*.*" |
+          xargs -n1 kcov --exclude-pattern=/.cargo,/usr/lib --verify target/cov
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ inputs.codecov_token }}
