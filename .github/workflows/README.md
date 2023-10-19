@@ -43,12 +43,13 @@ jobs:
     with:
       test_flags: --no-default-features
 
-  # In case the repository needs to enable specific features:
+  # In case the repository needs to enable specific features or requires a Rust target installed:
   test_features:
     name: Specific features tests
     uses: dusk-network/.github/.github/workflows/run-tests.yml@main
     with:
       test_flags: --features=feature1,feature2
+      rust_target: wasm32-unknown-unknown
 
 ```
 

@@ -6,6 +6,10 @@ on:
         required: false
         type: string
         default: ''
+      rust_target:
+        description: 'Optional Rust target'
+        required: false
+        type: string
 
 name: Tests
 
@@ -15,5 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Install Optional Rust Target
+        if: ${{ inputs.rust_target }}
+        run: rustup target add ${{ inputs.rust_target }}
       - uses: Swatinem/rust-cache@v2
-      - run: cargo test --release ${{ inputs.test_flags }}
+      - name: Execute Tests
+        run: cargo test --release ${{ inputs.test_flags }}
