@@ -12,20 +12,16 @@
 
 <!-- POSSIBLE HEADER:
 Dusk unlocks economic opportunities for all by making institutional-level financial assets directly available to users and investors 
+
+Dusk is the global financial network for institutions and users with the privacy of FinTech, the instant settlement and clearance of DLTs, and the extensibility of DeFi
 -->
 
 <!-- Short description -->
-### Dusk is the global financial network for institutions and users with the privacy of FinTech, the instant settlement and clearance of DLTs, and the extensibility of DeFi.
-
+### Dusk is a permissionless, ZK-friendly L1 blockchain protocol focused on Compliance and Privacy to tokenize Real-World Assets.
 ---
 
 <!-- Main repos -->
 ## Main repositories
-
-* [`dusk-blockchain`](https://github.com/dusk-network/dusk-blockchain): reference implementation of the Dusk node\
-[![dusk-network/dusk-blockchain last commit](https://img.shields.io/github/last-commit/dusk-network/dusk-blockchain)](https://github.com/dusk-network/dusk-blockchain/commits/master)
-[![dusk-network/dusk-blockchain issues](https://img.shields.io/github/issues-raw/dusk-network/dusk-blockchain)](https://github.com/dusk-network/dusk-blockchain/issues)
-[![dusk-network/dusk-blockchain pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/dusk-blockchain)](https://github.com/dusk-network/dusk-blockchain/pulls)
 
 * [`rusk`](https://github.com/dusk-network/rusk): Dusk's smart contract platform \
 [![dusk-network/rusk last commit](https://img.shields.io/github/last-commit/dusk-network/rusk)](https://github.com/dusk-network/rusk/commits/master)
@@ -41,13 +37,6 @@ Dusk unlocks economic opportunities for all by making institutional-level financ
 [![dusk-network/wallet-cli last commit](https://img.shields.io/github/last-commit/dusk-network/wallet-cli)](https://github.com/dusk-network/wallet-cli/commits/main)
 [![dusk-network/wallet-cli issues](https://img.shields.io/github/issues-raw/dusk-network/wallet-cli)](https://github.com/dusk-network/wallet-cli/issues)
 [![dusk-network/wallet-cli pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/wallet-cli)](https://github.com/dusk-network/wallet-cli/pulls)
-
-* [`itn-installer`](https://github.com/dusk-network/itn-installer): installer to run a Dusk node for our ITN program\
-[![dusk-network/itn-installer last commit](https://img.shields.io/github/last-commit/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/commits/main)
-[![dusk-network/itn-installer issues](https://img.shields.io/github/issues-raw/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/issues)
-[![dusk-network/itn-installer pull requests](https://img.shields.io/github/issues-pr-raw/dusk-network/itn-installer)](https://github.com/dusk-network/itn-installer/pulls)
-
-## Libraries
 
 * [`plonk`](https://github.com/dusk-network/plonk): Rust implementation of the PLONK ZKProof System, done by the Dusk team \
 [![dusk-network/plonk last commit](https://img.shields.io/github/last-commit/dusk-network/plonk)](https://github.com/dusk-network/plonk/commits/master)
