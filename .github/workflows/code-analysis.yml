@@ -20,7 +20,7 @@ name: Code Analysis
 jobs:
   rustfmt:
     name: Rust Format
-    runs-on: core
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
@@ -38,7 +38,7 @@ jobs:
 
   clippy:
     name: Clippy Check
-    runs-on: core
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: Swatinem/rust-cache@v2
