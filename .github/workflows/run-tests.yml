@@ -16,7 +16,7 @@ name: Tests
 jobs:
   tests:
     name: Run tests
-    runs-on: core
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Install Optional Rust Target
