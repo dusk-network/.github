@@ -23,10 +23,6 @@ jobs:
     runs-on: core
     steps:
       - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@master
-        with:
-          components: rustfmt
-          toolchain: ${{ inputs.toolchain }}
       - run: rustup override set ${{ inputs.toolchain }}
       - uses: Swatinem/rust-cache@v2
       - run: |
