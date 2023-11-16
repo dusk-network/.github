@@ -19,9 +19,9 @@ jobs:
     runs-on: core
     steps:
       - uses: actions/checkout@v3
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
       - name: Install Optional Rust Target
         if: ${{ inputs.rust_target }}
         run: rustup target add ${{ inputs.rust_target }}
-      - uses: Swatinem/rust-cache@v2
       - name: Execute Tests
         run: cargo test --release ${{ inputs.test_flags }}
