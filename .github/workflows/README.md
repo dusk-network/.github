@@ -10,9 +10,7 @@ name: Dusk CI
 
 jobs:
   # Import the reusable workflow to use Clippy and Rustfmt
-  # Rustfmt is ran with the nightly toolchain by default due to nice features
-  # not being stable yet. The toolchain type and version is, however, passable to the 
-  # workflow file.
+  # Rustfmt is ran with the toolchain specified in the `rust-tooolchain.toml` file.
   #
   # The default clippy configuration might be too strict for certain repositories.
   # The `clippy_default` parameter is set to true and will execute:
@@ -27,7 +25,6 @@ jobs:
     name: Code Analysis
     uses: dusk-network/.github/.github/workflows/code-analysis.yml@main
   # with:
-  #   toolchain: stable
   #   clippy_default: true
   #   clippy_args: ''
 
