@@ -23,8 +23,8 @@ jobs:
     runs-on: core
     steps:
       - uses: actions/checkout@v3
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: rustup override set ${{ inputs.toolchain }}
-      - uses: Swatinem/rust-cache@v2
       - run: |
           if [ "${{ inputs.toolchain }}" == "nightly" ]; then
             cargo +nightly fmt --all -- --check
@@ -37,7 +37,7 @@ jobs:
     runs-on: core
     steps:
       - uses: actions/checkout@v3
-      - uses: Swatinem/rust-cache@v2
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: |
           if [ ${{ inputs.clippy_default }} == true ]; then
             cargo clippy --all-features --release -- -D warnings
