@@ -18,9 +18,8 @@ jobs:
     name: Run tests
     runs-on: core
     steps:
-      - uses: actions/checkout@v3
-      - run: rustup self uninstall -y || true 
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - uses: actions/checkout@v4
+      - uses: dsherret/rust-toolchain-file@v1
       - name: Install Optional Rust Target
         if: ${{ inputs.rust_target }}
         run: rustup target add ${{ inputs.rust_target }}
