@@ -2,6 +2,8 @@
 
 This workflows directory contains the most commonly used workflow jobs within our organization. These workflows are reusable and can be imported into other workflow files. For more information see the Github article on [Reusable workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
 
+By default, the workflows use `core` runners. These are self-hosted runners in a Linux Ubuntu environment. If you run into a `startup failure` error with these runners, be sure to enable the self-hosted runners on the repository you're adding these flows to.
+
 Example:
 ```yaml
 on: [pull_request, push]
