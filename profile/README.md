@@ -55,9 +55,8 @@ Our mission is to unlock economic inclusion by bringing institution-level assets
 ## Contributing
 If you wish to contribute to Dusk, please have a look to our [contributing guidelines](https://github.com/dusk-network/.github/blob/main/.github/CONTRIBUTING.md).
 
-Resources:
-- [Dusk Wiki](https://wiki.dusk.network/): Wiki containing information for the public and the team.
-- [Dusk Index](https://github.com/dusk-network/dusk-index): Guide to Dusk documentation and repositories <!-- TODO: display this only for members -->
+## Documentation
+The documentation website containing information for node runners and developers can be found at [docs.dusk.network](https://docs.dusk.network/).
 
 ---
 ## Follow us
