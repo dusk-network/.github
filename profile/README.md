@@ -67,5 +67,5 @@ The documentation website containing information for node runners and developers
 
 
 ## Join the Dusk community
-  - [Discord](https://discord.com/invite/dusknetwork)
+  - [Discord](https://discord.com/invite/dusk-official)
   - [Telegram](https://t.me/DuskNetwork)
