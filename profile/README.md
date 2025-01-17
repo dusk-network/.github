@@ -1,41 +1,22 @@
-# Welcome to Dusk!
-
 <!-- Dusk Banner -->
 <a href="https://dusk.network/">
   <p align="center">
     <picture>
       <source srcset="https://raw.githubusercontent.com/dusk-network/.github/main/profile/dusk_github_cover.png">
-      <img alt="Dusk">
+      <img width=600 alt="Dusk">
     </picture>
   </p>
 </a> 
 
-<!-- POSSIBLE HEADER:
-Dusk unlocks economic opportunities for all by making institutional-level financial assets directly available to users and investors 
+<p align="center">
+  <a href="https://dusk.network">🌐 Website</a> | 
+  <a href="https://docs.dusk.network">📒 Documentation</a> | 
+  <a href="https://discord.com/invite/dusk-official">💬 Community</a> | 
+  <a href="https://x.com/duskfoundation">🐦 X</a> | 
+  <a href="https://linkedin.com/company/dusknetwork">🔗 LinkedIn</a> | 
+  <a href="https://github.com/dusk-network/.github/blob/main/.github/CONTRIBUTING.md">🤝 Contributing</a>
+</p>
 
-Dusk is the global financial network for institutions and users with the privacy of FinTech, the instant settlement and clearance of DLTs, and the extensibility of DeFi
--->
-
-<!-- Short description -->
-Dusk is a permissionless, ZK-friendly L1 blockchain protocol focused on Compliance and Privacy to tokenize Real-World Assets.
-
-Our mission is to unlock economic inclusion by bringing institution-level assets to anyone's wallet. Dusk has the only privacy-first technology to bring classic finance and real-world assets on-chain.
-
----
-
-## Contributing
-If you wish to contribute to Dusk, please have a look to our [contributing guidelines](https://github.com/dusk-network/.github/blob/main/.github/CONTRIBUTING.md).
-
-## Documentation
-The documentation website containing information for node runners and developers can be found at [docs.dusk.network](https://docs.dusk.network/).
-
----
-## Follow us
-  - [LinkedIn](https://www.linkedin.com/company/dusknetwork/)
-  - [Twitter](https://twitter.com/duskfoundation)
-  - [YouTube](https://www.youtube.com/c/DuskNetwork)
-  - [Reddit](https://www.reddit.com/r/DuskNetwork/)
-
-## Join the Dusk community
-  - [Discord](https://discord.com/invite/dusk-official)
-  - [Telegram](https://t.me/DuskNetwork)
+<p align="center">
+  <strong>Dusk empowers universal access to financial markets by bringing the entire financial ecosystem on-chain. Our protocol enables individuals to invest and validate while helping institutions issue smart, compliant, and cost-effective real-world assets. Designed for seamless clearance and settlement, Dusk leads the way in transforming securities, cryptocurrencies, and digital cash.</strong>
+</p>
