@@ -7,10 +7,12 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+#### Describe the bug
+
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+#### To Reproduce
+
 if applicable add a *minimum reproducible example*
 
 ```
@@ -18,17 +20,21 @@ if applicable add a *minimum reproducible example*
 // 
 ```
 
-**Expected behaviour**
+#### Expected behaviour
+
 A clear and concise description of what you expected to happen.
 
-**Logs/Screenshot**
+#### Logs/Screenshot
+
 If applicable, add damning logs
 
-**Platform**
+#### Platform
+
 Fill as appropriate
  - Architecture: [ARM, 8086]
  - OS: [e.g. iOS, Linux]
  - Browser [e.g. chrome, safari]
 
-**Additional context**
+#### Additional context
+
 Add any other context about the problem here.
