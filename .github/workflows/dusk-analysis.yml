@@ -1,5 +1,10 @@
 on:
   workflow_call:
+    inputs:
+      working-directory:
+        required: false
+        type: string
+        default: .
 
 name: Dusk Analysis
 
@@ -11,4 +16,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dsherret/rust-toolchain-file@v1
       - run: cargo install --git https://github.com/dusk-network/cargo-dusk-analyzer
+        working-directory: ${{ inputs.working-directory }}
       - run: cargo dusk-analyzer
+        working-directory: ${{ inputs.working-directory }}

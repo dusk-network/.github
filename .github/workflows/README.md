@@ -31,9 +31,16 @@ jobs:
   #   clippy_args: ''
 
   # Import the Dusk analyzer workflow to check for license markings etc.
+  #
+  # If your project is not in the root directory, pass the `working-directory` input.
+  # It is required to have a `rust-toolchain.toml` in the root of your project, regardless
+  # of whether you pass a `working-directory` or not. This is due to an underlying action 
+  # not allowing for the working directory to be changed for itself.
   dusk_analysis:
     name: Dusk Analyzer
     uses: dusk-network/.github/.github/workflows/dusk-analysis.yml@main
+    with:
+      working-directory: ./app
 
   # Test flags are passable to `run-tests`:
   test_no_std:
