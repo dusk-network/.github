@@ -11,11 +11,122 @@ name: Dusk Analysis
 jobs:
   dusk_analyzer:
     name: Dusk Analyzer
+    # Checks for valid MPL license header in source code files
+    # Checks for git dependency pinning
     runs-on: core
     steps:
       - uses: actions/checkout@v4
       - uses: dsherret/rust-toolchain-file@v1
-      - run: cargo install --git https://github.com/dusk-network/cargo-dusk-analyzer
+
+      - name: Dusk checks
         working-directory: ${{ inputs.working-directory }}
-      - run: cargo dusk-analyzer
-        working-directory: ${{ inputs.working-directory }}
+        shell: bash
+        run: |
+          #!/usr/bin/env bash
+          set -euo pipefail
+
+          repo_root="${GITHUB_WORKSPACE:-$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)}"
+          rel() { local p="$1"; [[ "$p" == "$repo_root/"* ]] && printf '%s' "${p#"$repo_root"/}" || printf '%s' "$p"; }
+
+          err() {
+            local file="$1" title="$2" msg="$3"
+            if [[ -n "$file" ]]; then
+              echo "::error file=$file,title=$title::$msg"
+            else
+              echo "::error title=$title::$msg"
+            fi
+          }
+
+          cwd="$(pwd -P)"
+          manifest="$cwd/Cargo.toml"
+          license="$cwd/LICENSE"
+
+          [[ -f "$manifest" ]] || { err "$(rel "$manifest")" "Dusk analysis" "Cargo.toml not found (working dir: $cwd)"; exit 1; }
+          [[ -f "$license"  ]] || { err "$(rel "$license")"  "Dusk analysis" "Missing LICENSE (working dir: $cwd)"; exit 1; }
+          command -v jq >/dev/null || { err "" "Dusk analysis" "jq is required on the runner"; exit 1; }
+
+          metadata="$(mktemp)"
+          trap 'rm -f "$metadata"' EXIT
+          cargo metadata --no-deps --format-version 1 --manifest-path "$manifest" >"$metadata"
+
+          semver_ok() {
+            local v="$1" pre
+            [[ $v =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-([0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*))?(\+([0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*))?$ ]] || return 1
+            pre="${BASH_REMATCH[5]-}"
+            [[ -z $pre ]] && return 0
+            [[ $pre =~ (^|\.)(0[0-9]+)(\.|$) ]] && return 1
+            return 0
+          }
+
+          errors=0
+
+          # 1) dusk-network git deps must be pinned with ?tag=<semver>
+          while IFS=$'\t' read -r pkg mp dep src; do
+            mp="$(rel "$mp")"
+            query="${src#*\?}"; query="${query%%#*}"
+
+            if [[ $src != *\?* || $query != tag=* ]]; then
+              err "$mp" "Dusk git dependency" \
+                "Package '$pkg' uses dusk-network git dependency '$dep' but it is NOT pinned via tag=. Fix: add tag=\"vX.Y.Z\" (or \"${dep}-X.Y.Z\"). Found source: $src"
+              ((errors+=1))
+              continue
+            fi
+
+            tag="${query#tag=}"
+
+            case "$tag" in
+              "$dep-"*) version="${tag#"$dep-"}" ;;
+              v.*)      version="${tag#v.}" ;;
+              v*)       version="${tag#v}" ;;
+              *)        version="$tag" ;;
+            esac
+
+            if ! semver_ok "$version"; then
+              err "$mp" "Dusk git dependency" \
+                "Package '$pkg' uses dusk-network git dependency '$dep' with tag='$tag' (parsed='$version'), which is not SemVer. Fix: use tag=\"vX.Y.Z\". Found source: $src"
+              ((errors+=1))
+            fi
+          done < <(
+            jq -r '
+              .packages[] as $p
+              | $p.dependencies[]?
+              | select(.req=="*" and ((.source//"")|startswith("git+https://github.com/dusk-network/")))
+              | [$p.name, $p.manifest_path, .name, (.source//"")] | @tsv
+            ' "$metadata"
+          )
+
+          # 2) License header check
+          while IFS=$'\t' read -r pkg mp; do
+            dir="${mp%/*}"
+
+            while IFS= read -r -d '' file; do
+              file_rel="$(rel "$file")"
+
+              awk '
+                BEGIN {
+                  h[1]="// This Source Code Form is subject to the terms of the Mozilla Public"
+                  h[2]="// License, v. 2.0. If a copy of the MPL was not distributed with this"
+                  h[3]="// file, You can obtain one at http://mozilla.org/MPL/2.0/."
+                  h[4]="//"
+                  h[5]="// Copyright (c) DUSK NETWORK. All rights reserved."
+                }
+                { sub(/\r$/, "") }
+                NR<=5 { if ($0 != h[NR]) exit 1 }
+                NR==6 { if ($0 != "") exit 1; exit 0 }
+                END   { if (NR < 5) exit 1 }
+              ' "$file" || {
+                err "$file_rel" "Dusk license header" \
+                  "Missing or incorrect MPL-2.0 header in package '$pkg'. (Expected 5-line header + empty line.)"
+                ((errors+=1))
+              }
+            done < <(
+              find "$dir" \
+                -type d \( -name target -o -name .git \) -prune -o \
+                -mindepth 2 -type f -name '*.rs' -print0
+            )
+          done < <(jq -r '.packages[] | [.name, .manifest_path] | @tsv' "$metadata")
+
+          if ((errors > 0)); then
+            err "" "Dusk analysis" "Found $errors issue(s)."
+            exit 1
+          fi
