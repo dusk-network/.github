@@ -1,12 +1,12 @@
 <!-- Dusk Banner -->
-<a href="https://dusk.network/">
-  <p align="center">
+<p align="center">
+  <a href="https://dusk.network/">
     <picture>
       <source srcset="https://raw.githubusercontent.com/dusk-network/.github/main/profile/dusk_github_cover.png">
       <img width=600 alt="Dusk">
     </picture>
-  </p>
-</a> 
+  </a>
+</p> 
 
 <p align="center">
   <a href="https://dusk.network">🌐 Website</a> | 
