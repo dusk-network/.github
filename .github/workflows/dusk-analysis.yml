@@ -11,6 +11,8 @@ name: Dusk Analysis
 jobs:
   dusk_analyzer:
     name: Dusk Analyzer
+    # Checks for valid MPL license header in source code files
+    # Checks for git dependency pinning
     runs-on: core
     steps:
       - uses: actions/checkout@v4
