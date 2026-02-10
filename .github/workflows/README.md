@@ -57,6 +57,15 @@ jobs:
       test_flags: --features=feature1,feature2
       rust_target: wasm32-unknown-unknown
 
+  # Import cargo-deny checks.
+  # The selected working directory must contain deny.toml.
+  cargo_deny:
+    name: Cargo Deny
+    uses: dusk-network/.github/.github/workflows/cargo-deny.yml@main
+    with:
+      working-directory: ./app
+      deny-check-args: --all-features
+
 ```
 
 ## Toolchain

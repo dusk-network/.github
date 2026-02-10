@@ -1,0 +1,42 @@
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: "Project directory where Cargo.toml and deny.toml are located"
+        required: false
+        type: string
+        default: .
+      deny-check-args:
+        description: "Extra arguments passed to cargo deny check"
+        required: false
+        type: string
+        default: ""
+
+name: Cargo Deny
+
+jobs:
+  cargo_deny:
+    name: Cargo Deny
+    runs-on: core
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-deny
+        run: cargo install --locked cargo-deny
+
+      - name: Ensure deny.toml exists
+        working-directory: ${{ inputs.working-directory }}
+        shell: bash
+        run: |
+          if [ ! -f deny.toml ]; then
+            echo "::error file=deny.toml,title=Missing deny.toml::deny.toml is required. Add a deny.toml to this repository."
+            exit 1
+          fi
+
+      - name: Run cargo-deny checks
+        working-directory: ${{ inputs.working-directory }}
+        run: cargo deny check ${{ inputs.deny-check-args }}
