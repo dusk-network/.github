@@ -8,6 +8,7 @@ The reusable workflows are configured for least privilege:
 - They run with `permissions: contents: read`.
 - `actions/checkout` uses `persist-credentials: false`.
 - For `pull_request` events, fork PR jobs are blocked on `core` by default. Set `allow_fork_pr_on_core: true` only if you explicitly want to allow that.
+- Third-party actions are pinned to immutable commit SHAs.
 
 Example:
 ```yaml
