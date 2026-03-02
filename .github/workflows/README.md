@@ -4,6 +4,11 @@ This workflows directory contains the most commonly used workflow jobs within ou
 
 By default, the workflows use `core` runners. These are self-hosted runners in a Linux Ubuntu environment. If you run into a `startup failure` error with these runners, be sure to enable the self-hosted runners for the repository and allow external actions to be executed. Repositories can override the default runner label with the reusable workflow `runner` input.
 
+The reusable workflows are configured for least privilege:
+- They run with `permissions: contents: read`.
+- `actions/checkout` uses `persist-credentials: false`.
+- For `pull_request` events, fork PR jobs are blocked on `core` by default. Set `allow_fork_pr_on_core: true` only if you explicitly want to allow that.
+
 Example:
 ```yaml
 on: [pull_request, push]
@@ -32,6 +37,7 @@ jobs:
   #   clippy_default: true
   #   clippy_args: ''
   #   enable_sccache: true
+  #   allow_fork_pr_on_core: false
 
   # Import the Dusk analyzer workflow to check for license markings etc.
   #
@@ -45,6 +51,7 @@ jobs:
     with:
       runner: core
       working-directory: ./app
+      # allow_fork_pr_on_core: false
 
   # Test flags are passable to `run-tests`:
   test_no_std:
@@ -54,6 +61,7 @@ jobs:
       runner: core
       test_flags: --no-default-features
       # enable_sccache: true
+      # allow_fork_pr_on_core: false
 
   # In case the repository needs to enable specific features or requires a Rust target installed:
   test_features:
@@ -64,6 +72,7 @@ jobs:
       test_flags: --features=feature1,feature2
       rust_target: wasm32-unknown-unknown
       # enable_sccache: true
+      # allow_fork_pr_on_core: false
 
   # Import cargo-deny checks.
   # The selected working directory must contain deny.toml.
