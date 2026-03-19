@@ -1,6 +1,11 @@
 on:
   workflow_call:
     inputs:
+      runner:
+        description: 'Runner label or image'
+        required: false
+        type: string
+        default: core
       test_flags:
         description: 'Additional flags for cargo test'
         required: false
@@ -10,18 +15,56 @@ on:
         description: 'Optional Rust target'
         required: false
         type: string
+      enable_sccache:
+        description: 'Enable sccache automatically when it is available on the runner'
+        required: false
+        type: boolean
+        default: true
 
 name: Tests
 
 jobs:
   tests:
     name: Run tests
-    runs-on: core
+    runs-on: ${{ inputs.runner }}
     steps:
       - uses: actions/checkout@v4
       - uses: dsherret/rust-toolchain-file@v1
+      - name: Enable sccache
+        if: ${{ inputs.enable_sccache }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if command -v sccache >/dev/null; then
+            echo "RUSTC_WRAPPER=$(command -v sccache)" >> "$GITHUB_ENV"
+          fi
       - name: Install Optional Rust Target
         if: ${{ inputs.rust_target }}
-        run: rustup target add ${{ inputs.rust_target }}
+        shell: bash
+        env:
+          RUST_TARGET: ${{ inputs.rust_target }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$RUST_TARGET" =~ ^[A-Za-z0-9._-]+$ ]]; then
+            echo "::error::Invalid rust target '$RUST_TARGET'"
+            exit 1
+          fi
+          rustup target add "$RUST_TARGET"
       - name: Execute Tests
-        run: cargo test --release ${{ inputs.test_flags }}
+        shell: bash
+        env:
+          TEST_FLAGS: ${{ inputs.test_flags }}
+        run: |
+          set -euo pipefail
+          test_args=()
+          if [[ -n "$TEST_FLAGS" ]]; then
+            read -r -a test_args <<< "$TEST_FLAGS"
+          fi
+          cargo test --release "${test_args[@]}"
+      - name: sccache stats
+        if: ${{ always() && inputs.enable_sccache }}
+        shell: bash
+        run: |
+          if command -v sccache >/dev/null; then
+            sccache -s || true
+          fi
