@@ -1,6 +1,11 @@
 on:
   workflow_call:
     inputs:
+      runner:
+        description: "Runner label or image"
+        required: false
+        type: string
+        default: core
       working-directory:
         description: "Project directory where Cargo.toml and deny.toml are located"
         required: false
@@ -11,19 +16,33 @@ on:
         required: false
         type: string
         default: ""
+      enable_sccache:
+        description: "Enable sccache automatically when it is available on the runner"
+        required: false
+        type: boolean
+        default: true
 
 name: Cargo Deny
 
 jobs:
   cargo_deny:
     name: Cargo Deny
-    runs-on: core
+    runs-on: ${{ inputs.runner }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install stable Rust
         uses: dtolnay/rust-toolchain@stable
+
+      - name: Enable sccache
+        if: ${{ inputs.enable_sccache }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if command -v sccache >/dev/null; then
+            echo "RUSTC_WRAPPER=$(command -v sccache)" >> "$GITHUB_ENV"
+          fi
 
       - name: Install cargo-deny
         run: cargo install --locked cargo-deny
@@ -40,3 +59,10 @@ jobs:
       - name: Run cargo-deny checks
         working-directory: ${{ inputs.working-directory }}
         run: cargo deny check ${{ inputs.deny-check-args }}
+      - name: sccache stats
+        if: ${{ always() && inputs.enable_sccache }}
+        shell: bash
+        run: |
+          if command -v sccache >/dev/null; then
+            sccache -s || true
+          fi

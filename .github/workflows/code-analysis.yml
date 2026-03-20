@@ -1,6 +1,11 @@
 on:
   workflow_call:
     inputs:
+      runner:
+        description: 'Runner label or image'
+        type: string
+        required: false
+        default: core
       clippy_default:
         description: 'Use default arguments'
         type: boolean
@@ -10,29 +15,56 @@ on:
         description: 'Custom arguments for Clippy'
         type: string
         required: false
+      enable_sccache:
+        description: 'Enable sccache automatically when it is available on the runner'
+        type: boolean
+        required: false
+        default: true
 
 name: Code Analysis
 
 jobs:
-  rustfmt:
-    name: Rust Format
-    runs-on: core
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dsherret/rust-toolchain-file@v1
-      - run: cargo fmt --all -- --check
-
   clippy:
     name: Clippy Check
-    runs-on: core
+    runs-on: ${{ inputs.runner }}
     steps:
       - uses: actions/checkout@v4
       - uses: dsherret/rust-toolchain-file@v1
-      - run: |
-          if [ ${{ inputs.clippy_default }} == true ]; then
+      - name: Enable sccache
+        if: ${{ inputs.enable_sccache }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if command -v sccache >/dev/null; then
+            echo "RUSTC_WRAPPER=$(command -v sccache)" >> "$GITHUB_ENV"
+          fi
+      - name: Run rustfmt
+        run: cargo fmt --all -- --check
+      - name: Run Clippy
+        shell: bash
+        env:
+          CLIPPY_DEFAULT: ${{ inputs.clippy_default }}
+          CLIPPY_ARGS: ${{ inputs.clippy_args }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$CLIPPY_DEFAULT" == "true" ]]; then
             cargo clippy --all-features --release -- -D warnings
-          elif [ -z "${{ inputs.clippy_default }}" ]; then
+            exit 0
+          fi
+
+          if [[ -z "${CLIPPY_ARGS}" ]]; then
             cargo clippy
-          else
-            cargo clippy ${{ inputs.clippy_args }}
+            exit 0
+          fi
+
+          clippy_args=()
+          read -r -a clippy_args <<< "$CLIPPY_ARGS"
+          cargo clippy "${clippy_args[@]}"
+      - name: sccache stats
+        if: ${{ always() && inputs.enable_sccache }}
+        shell: bash
+        run: |
+          if command -v sccache >/dev/null; then
+            sccache -s || true
           fi

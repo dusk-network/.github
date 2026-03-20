@@ -1,6 +1,10 @@
 on:
   workflow_call:
     inputs:
+      runner:
+        required: false
+        type: string
+        default: core
       working-directory:
         required: false
         type: string
@@ -13,7 +17,7 @@ jobs:
     name: Dusk Analyzer
     # Checks for valid MPL license header in source code files
     # Checks for git dependency pinning
-    runs-on: core
+    runs-on: ${{ inputs.runner }}
     steps:
       - uses: actions/checkout@v4
       - uses: dsherret/rust-toolchain-file@v1

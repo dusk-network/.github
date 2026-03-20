@@ -2,7 +2,7 @@
 
 This workflows directory contains the most commonly used workflow jobs within our organization. These workflows are reusable and can be imported into other workflow files. For more information see the Github article on [Reusable workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
 
-By default, the workflows use `core` runners. These are self-hosted runners in a Linux Ubuntu environment. If you run into a `startup failure` error with these runners, be sure to enable the self-hosted runners said repository and allow external actions to be executed.
+By default, the workflows use `core` runners. These are self-hosted runners in a Linux Ubuntu environment. If you run into a `startup failure` error with these runners, be sure to enable the self-hosted runners for the repository and allow external actions to be executed. Repositories can override the default runner label with the reusable workflow `runner` input.
 
 Example:
 ```yaml
@@ -11,8 +11,9 @@ on: [pull_request, push]
 name: Dusk CI
 
 jobs:
-  # Import the reusable workflow to use Clippy and Rustfmt
-  # Rustfmt is ran with the toolchain specified in the `rust-tooolchain.toml` file.
+  # Import the reusable workflow to use Clippy and Rustfmt.
+  # Rustfmt runs first inside the same job as Clippy, using the toolchain
+  # specified in the `rust-toolchain.toml` file.
   #
   # The default clippy configuration might be too strict for certain repositories.
   # The `clippy_default` parameter is set to true and will execute:
@@ -27,8 +28,10 @@ jobs:
     name: Code Analysis
     uses: dusk-network/.github/.github/workflows/code-analysis.yml@main
   # with:
+  #   runner: core
   #   clippy_default: true
   #   clippy_args: ''
+  #   enable_sccache: true
 
   # Import the Dusk analyzer workflow to check for license markings etc.
   #
@@ -40,6 +43,7 @@ jobs:
     name: Dusk Analyzer
     uses: dusk-network/.github/.github/workflows/dusk-analysis.yml@main
     with:
+      runner: core
       working-directory: ./app
 
   # Test flags are passable to `run-tests`:
@@ -47,15 +51,19 @@ jobs:
     name: no_std tests
     uses: dusk-network/.github/.github/workflows/run-tests.yml@main
     with:
+      runner: core
       test_flags: --no-default-features
+      # enable_sccache: true
 
   # In case the repository needs to enable specific features or requires a Rust target installed:
   test_features:
     name: Specific features tests
     uses: dusk-network/.github/.github/workflows/run-tests.yml@main
     with:
+      runner: core
       test_flags: --features=feature1,feature2
       rust_target: wasm32-unknown-unknown
+      # enable_sccache: true
 
   # Import cargo-deny checks.
   # The selected working directory must contain deny.toml.
@@ -63,12 +71,14 @@ jobs:
     name: Cargo Deny
     uses: dusk-network/.github/.github/workflows/cargo-deny.yml@main
     with:
+      runner: core
       working-directory: ./app
       deny-check-args: --all-features
+      # enable_sccache: true
 
 ```
 
-## Toolchain
+## Toolchain And Cache
 
 To set the toolchain for the workflows, usage of `rust-toolchain.toml` is recommended. For certain channels, toolchain components like `clippy` and `rustfmt` are not available by default. This is problematic when using the `code_analysis` workflow. The following example config is therefore recommended:
 ```toml
@@ -76,3 +86,5 @@ To set the toolchain for the workflows, usage of `rust-toolchain.toml` is recomm
 channel = "nightly"
 components = ["clippy", "rustfmt"]
 ```
+
+When `enable_sccache` is left at its default value, the reusable Rust workflows automatically set `RUSTC_WRAPPER` if `sccache` is available on the runner and emit `sccache -s` at the end of the job. This keeps cache usage visible without making hosted runners fail if `sccache` is absent.
