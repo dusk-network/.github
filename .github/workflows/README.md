@@ -85,6 +85,7 @@ jobs:
       working-directory: ./app
       deny-check-args: --all-features
       # enable_sccache: true
+      # allow_fork_pr_on_core: false
 
 ```
 
