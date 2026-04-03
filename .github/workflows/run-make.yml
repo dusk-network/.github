@@ -6,11 +6,15 @@ on:
         required: false
         type: string
         default: core
-      test_flags:
-        description: 'Additional flags for cargo test'
+      make_target:
+        description: 'Make target to execute'
+        required: true
+        type: string
+      working-directory:
+        description: 'Relative working directory that contains the Makefile'
         required: false
         type: string
-        default: ''
+        default: .
       rust_target:
         description: 'Optional Rust target'
         required: false
@@ -26,20 +30,23 @@ on:
         required: false
         default: false
 
-name: Tests
+name: Make
 
 permissions:
   contents: read
 
 jobs:
-  tests:
-    name: Run tests
+  make:
+    name: Run make target
     runs-on: ${{ inputs.runner }}
     if: ${{ inputs.runner != 'core' || inputs.allow_fork_pr_on_core || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           persist-credentials: false
+      - name: Add Rust tools to PATH
+        shell: bash
+        run: echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
       - uses: dsherret/rust-toolchain-file@3551321aa44dd44a0393eb3b6bdfbc5d25ecf621 # v1
       - name: Enable sccache
         if: ${{ inputs.enable_sccache }}
@@ -61,17 +68,37 @@ jobs:
             exit 1
           fi
           rustup target add "$RUST_TARGET"
-      - name: Execute Tests
+      - name: Validate Inputs
         shell: bash
         env:
-          TEST_FLAGS: ${{ inputs.test_flags }}
+          MAKE_TARGET: ${{ inputs.make_target }}
+          WORKING_DIRECTORY: ${{ inputs.working-directory }}
         run: |
           set -euo pipefail
-          test_args=()
-          if [[ -n "$TEST_FLAGS" ]]; then
-            read -r -a test_args <<< "$TEST_FLAGS"
+          if [[ ! "$MAKE_TARGET" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]; then
+            echo "::error::Invalid make target '$MAKE_TARGET'"
+            exit 1
           fi
-          cargo test --release "${test_args[@]}"
+          if [[ "$WORKING_DIRECTORY" == /* ]]; then
+            echo "::error::Working directory must be relative"
+            exit 1
+          fi
+          if [[ "$WORKING_DIRECTORY" =~ (^|/)\.\.(/|$) ]]; then
+            echo "::error::Working directory must stay within the repository"
+            exit 1
+          fi
+          if [[ ! -d "$WORKING_DIRECTORY" ]]; then
+            echo "::error::Working directory '$WORKING_DIRECTORY' does not exist"
+            exit 1
+          fi
+      - name: Execute Make Target
+        shell: bash
+        working-directory: ${{ inputs.working-directory }}
+        env:
+          MAKE_TARGET: ${{ inputs.make_target }}
+        run: |
+          set -euo pipefail
+          make "$MAKE_TARGET"
       - name: sccache stats
         if: ${{ always() && inputs.enable_sccache }}
         shell: bash

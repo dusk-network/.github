@@ -9,8 +9,16 @@ on:
         required: false
         type: string
         default: .
+      allow_fork_pr_on_core:
+        description: 'Allow execution on fork pull_request events when using core runners'
+        type: boolean
+        required: false
+        default: false
 
 name: Dusk Analysis
+
+permissions:
+  contents: read
 
 jobs:
   dusk_analyzer:
@@ -18,9 +26,12 @@ jobs:
     # Checks for valid MPL license header in source code files
     # Checks for git dependency pinning
     runs-on: ${{ inputs.runner }}
+    if: ${{ inputs.runner != 'core' || inputs.allow_fork_pr_on_core || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: dsherret/rust-toolchain-file@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - uses: dsherret/rust-toolchain-file@3551321aa44dd44a0393eb3b6bdfbc5d25ecf621 # v1
 
       - name: Dusk checks
         working-directory: ${{ inputs.working-directory }}
