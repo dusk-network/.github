@@ -9,6 +9,7 @@ The reusable workflows are configured for least privilege:
 - `actions/checkout` uses `persist-credentials: false`.
 - For `pull_request` events, fork PR jobs are blocked on `core` by default. Set `allow_fork_pr_on_core: true` only if you explicitly want to allow that.
 - Third-party actions are pinned to immutable commit SHAs.
+- Callers should pin reusable workflow refs to immutable commit SHAs instead of mutable branches such as `main`.
 
 Example:
 ```yaml
@@ -32,7 +33,7 @@ jobs:
   # false, `cargo clippy {clippy_args}` will be ran.
   code_analysis:
     name: Code Analysis
-    uses: dusk-network/.github/.github/workflows/code-analysis.yml@main
+    uses: dusk-network/.github/.github/workflows/code-analysis.yml@<full_commit_sha>
   # with:
   #   runner: core
   #   clippy_default: true
@@ -48,7 +49,7 @@ jobs:
   # not allowing for the working directory to be changed for itself.
   dusk_analysis:
     name: Dusk Analyzer
-    uses: dusk-network/.github/.github/workflows/dusk-analysis.yml@main
+    uses: dusk-network/.github/.github/workflows/dusk-analysis.yml@<full_commit_sha>
     with:
       runner: core
       working-directory: ./app
@@ -57,7 +58,7 @@ jobs:
   # Test flags are passable to `run-tests`:
   test_no_std:
     name: no_std tests
-    uses: dusk-network/.github/.github/workflows/run-tests.yml@main
+    uses: dusk-network/.github/.github/workflows/run-tests.yml@<full_commit_sha>
     with:
       runner: core
       test_flags: --no-default-features
@@ -67,7 +68,7 @@ jobs:
   # In case the repository needs to enable specific features or requires a Rust target installed:
   test_features:
     name: Specific features tests
-    uses: dusk-network/.github/.github/workflows/run-tests.yml@main
+    uses: dusk-network/.github/.github/workflows/run-tests.yml@<full_commit_sha>
     with:
       runner: core
       test_flags: --features=feature1,feature2
@@ -79,11 +80,23 @@ jobs:
   # The selected working directory must contain deny.toml.
   cargo_deny:
     name: Cargo Deny
-    uses: dusk-network/.github/.github/workflows/cargo-deny.yml@main
+    uses: dusk-network/.github/.github/workflows/cargo-deny.yml@<full_commit_sha>
     with:
       runner: core
       working-directory: ./app
       deny-check-args: --all-features
+      # enable_sccache: true
+      # allow_fork_pr_on_core: false
+
+  # Run a reviewed Make target while keeping the shared hardened Rust bootstrap.
+  make_target:
+    name: Make target
+    uses: dusk-network/.github/.github/workflows/run-make.yml@<full_commit_sha>
+    with:
+      runner: core
+      make_target: no-std
+      # working-directory: .
+      # rust_target: wasm32-unknown-unknown
       # enable_sccache: true
       # allow_fork_pr_on_core: false
 
@@ -99,3 +112,5 @@ components = ["clippy", "rustfmt"]
 ```
 
 When `enable_sccache` is left at its default value, the reusable Rust workflows automatically set `RUSTC_WRAPPER` if `sccache` is available on the runner and emit `sccache -s` at the end of the job. This keeps cache usage visible without making hosted runners fail if `sccache` is absent.
+
+The `run-make` workflow is intentionally constrained to a single validated Make target. Pass `make_target`, not a shell command string, so repositories can reuse the hardened bootstrap without turning the shared workflow into a generic command runner.
