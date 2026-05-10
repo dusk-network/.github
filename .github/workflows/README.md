@@ -244,6 +244,7 @@ jobs:
     uses: dusk-network/.github/.github/workflows/rust-release-check.yml@<full_commit_sha>
     with:
       publish-packages: dusk-curves
+      workflow-scripts-ref: <full_commit_sha>
 
   publish:
     name: Publish crates
@@ -256,6 +257,7 @@ jobs:
     with:
       publish-packages: dusk-curves
       environment: crates-io
+      workflow-scripts-ref: <full_commit_sha>
 ```
 
 ## Toolchain And Cache

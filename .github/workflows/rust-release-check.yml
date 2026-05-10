@@ -25,6 +25,11 @@ on:
         required: false
         type: string
         default: "0.3.157"
+      workflow-scripts-ref:
+        description: "Ref of dusk-network/.github to checkout for helper scripts"
+        required: false
+        type: string
+        default: main
 
 name: Rust Release Check
 
@@ -48,7 +53,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: dusk-network/.github
-          ref: ${{ github.workflow_sha }}
+          ref: ${{ inputs.workflow-scripts-ref }}
           path: .dusk-workflows
           persist-credentials: false
 
