@@ -1,0 +1,100 @@
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: "Runner label or image"
+        required: false
+        type: string
+        default: ubuntu-latest
+      manifest-path:
+        description: "Path to the workspace or package Cargo.toml"
+        required: false
+        type: string
+        default: Cargo.toml
+      config:
+        description: "Path to release-plz.toml"
+        required: false
+        type: string
+        default: release-plz.toml
+      publish-packages:
+        description: "Comma-separated list of crates expected to be publishable"
+        required: true
+        type: string
+      release-plz-version:
+        description: "release-plz binary version"
+        required: false
+        type: string
+        default: "0.3.157"
+
+name: Rust Release Check
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  release_check:
+    name: Validate release PR
+    runs-on: ${{ inputs.runner }}
+    if: ${{ github.repository_owner == 'dusk-network' && (startsWith(github.head_ref, 'release-plz-') || startsWith(github.head_ref, 'release/')) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Checkout Dusk reusable workflow scripts
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: dusk-network/.github
+          ref: ${{ github.workflow_sha }}
+          path: .dusk-workflows
+          persist-credentials: false
+
+      - name: Install Rust toolchain
+        uses: dsherret/rust-toolchain-file@3551321aa44dd44a0393eb3b6bdfbc5d25ecf621 # v1
+
+      - name: Validate release metadata and publish surface
+        env:
+          MANIFEST_PATH: ${{ inputs.manifest-path }}
+          PUBLISH_PACKAGES: ${{ inputs.publish-packages }}
+        run: >
+          python3 .dusk-workflows/.github/scripts/validate-rust-publish-surface.py
+          --manifest-path "$MANIFEST_PATH"
+          --publish-packages "$PUBLISH_PACKAGES"
+
+      - name: Run release-plz dry-run
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          MANIFEST_PATH: ${{ inputs.manifest-path }}
+          CONFIG: ${{ inputs.config }}
+          RELEASE_PLZ_VERSION: ${{ inputs.release-plz-version }}
+        run: |
+          set -euo pipefail
+          cargo install --locked release-plz --version "$RELEASE_PLZ_VERSION"
+          release-plz release \
+            --dry-run \
+            --git-token "$GITHUB_TOKEN" \
+            --manifest-path "$MANIFEST_PATH" \
+            --config "$CONFIG"
+
+      - name: Run cargo publish dry-runs
+        shell: bash
+        env:
+          MANIFEST_PATH: ${{ inputs.manifest-path }}
+          PUBLISH_PACKAGES: ${{ inputs.publish-packages }}
+        run: |
+          set -euo pipefail
+          IFS=',' read -ra packages <<< "$PUBLISH_PACKAGES"
+          for package in "${packages[@]}"; do
+            package="${package//[[:space:]]/}"
+            [[ "$package" != "__no_publishable_crates__" ]] || continue
+            [[ -n "$package" ]] || continue
+            if [[ -f Cargo.lock ]]; then
+              cargo publish --dry-run --manifest-path "$MANIFEST_PATH" --locked -p "$package"
+            else
+              cargo publish --dry-run --manifest-path "$MANIFEST_PATH" -p "$package"
+            fi
+          done
