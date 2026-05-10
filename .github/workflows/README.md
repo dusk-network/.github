@@ -102,6 +102,74 @@ jobs:
 
 ```
 
+## JavaScript / TypeScript Workflows
+
+The reusable npm workflows follow the same hardening defaults as the Rust
+workflows:
+- They run with `permissions: contents: read`.
+- `actions/checkout` uses `persist-credentials: false`.
+- Third-party actions are pinned to immutable commit SHAs.
+- The default runner is `core`.
+- For `pull_request` events, fork PR jobs are blocked on `core` by default.
+
+Callers should pin reusable workflow refs to immutable commit SHAs instead of
+mutable branches such as `main`.
+
+### npm CI
+
+Use `npm-ci.yml` for repositories that install with `npm ci` and validate via
+package scripts.
+
+```yaml
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+  workflow_dispatch:
+
+name: CI
+
+jobs:
+  lint_test:
+    name: Validate & build
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false
+    uses: dusk-network/.github/.github/workflows/npm-ci.yml@<full_commit_sha>
+    with:
+      runner: ubuntu-latest
+      node-version-file: .nvmrc
+      run_sveltekit_sync: true
+      # For repositories without .nvmrc, pass node-version instead:
+      # node-version: 22.11.0
+      # To customize validation, pass the npm scripts to run:
+      # scripts: |
+      #   format
+      #   lint
+      #   typecheck
+      #   test
+      #   build:storybook
+      # pack_dry_run: true
+      # codecov_files: coverage/lcov.info
+```
+
+Examples:
+- `docs`: pass `node-version: 22.12.0` and `scripts: build`.
+- `web-wallet` and `explorer`: pass `runner: ubuntu-latest`,
+  `node-version-file: .nvmrc`, and `run_sveltekit_sync: true`.
+- `stox-frontend`: pass `node-version: 22.11.0`.
+- `stox-admin-ui`: pass `node-version: 24` and `scripts` containing
+  `db:generate`, `format`, `typecheck`, and `test`.
+- `duskit`: pass `node-version: 22.15.0` and `scripts` containing
+  `format:check`, `lint`, `typecheck`, `test:coverage`, `build`, and
+  `build:storybook`.
+- `connect`: pass `node-version: 24`, `scripts: ci`, and
+  `pack_dry_run: true`.
+- `wallet`: pass `node-version: 24`, `scripts` containing `test:coverage`,
+  `build:chrome`, and `build:firefox`, plus
+  `codecov_files: coverage/lcov.info`.
+
 ## Toolchain And Cache
 
 To set the toolchain for the workflows, usage of `rust-toolchain.toml` is recommended. For certain channels, toolchain components like `clippy` and `rustfmt` are not available by default. This is problematic when using the `code_analysis` workflow. The following example config is therefore recommended:
