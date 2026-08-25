@@ -16,6 +16,16 @@ on:
         required: false
         type: string
         default: ""
+      rust-toolchain:
+        description: "Rust toolchain to install"
+        required: false
+        type: string
+        default: stable
+      cargo-deny-version:
+        description: "cargo-deny version to install; latest when empty"
+        required: false
+        type: string
+        default: ""
       enable_sccache:
         description: "Enable sccache automatically when it is available on the runner"
         required: false
@@ -43,8 +53,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install stable Rust
+      - name: Install Rust
         uses: dtolnay/rust-toolchain@631a55b12751854ce901bb631d5902ceb48146f7 # stable
+        with:
+          toolchain: ${{ inputs.rust-toolchain }}
 
       - name: Enable sccache
         if: ${{ inputs.enable_sccache }}
@@ -56,7 +68,15 @@ jobs:
           fi
 
       - name: Install cargo-deny
-        run: cargo install --locked cargo-deny
+        shell: bash
+        env:
+          CARGO_DENY_VERSION: ${{ inputs.cargo-deny-version }}
+        run: |
+          if [[ -n "$CARGO_DENY_VERSION" ]]; then
+            cargo install --locked cargo-deny --version "$CARGO_DENY_VERSION"
+          else
+            cargo install --locked cargo-deny
+          fi
 
       - name: Ensure deny.toml exists
         working-directory: ${{ inputs.working-directory }}
