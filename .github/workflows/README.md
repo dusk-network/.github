@@ -78,6 +78,8 @@ jobs:
 
   # Import cargo-deny checks.
   # The selected working directory must contain deny.toml.
+  # `rust-toolchain` defaults to `stable`. An empty `cargo-deny-version`
+  # installs the latest cargo-deny release.
   cargo_deny:
     name: Cargo Deny
     uses: dusk-network/.github/.github/workflows/cargo-deny.yml@<full_commit_sha>
@@ -85,6 +87,8 @@ jobs:
       runner: core
       working-directory: ./app
       deny-check-args: --all-features
+      # rust-toolchain: stable
+      # cargo-deny-version: ''
       # enable_sccache: true
       # allow_fork_pr_on_core: false
 
