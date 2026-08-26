@@ -174,6 +174,96 @@ Examples:
   `build:chrome`, and `build:firefox`, plus
   `codecov_files: coverage/lcov.info`.
 
+## Rust Release Workflows
+
+Rust crate releases use a manual release PR flow. Do not run release automation
+on ordinary pushes to `main` or `master`; those branches are development
+integration branches in several Dusk repositories.
+
+The release workflows are:
+- `rust-release-plan.yml`: creates or updates a `release-plz-*` release PR.
+- `rust-release-check.yml`: runs only for release PR branches and validates the
+  crates.io publish surface with release-plz and `cargo publish --dry-run`.
+- `rust-publish-crates.yml`: publishes from a reviewed release commit and is
+  protected by the `crates-io` GitHub Environment.
+
+Callers must pass a comma-separated `publish-packages` allowlist to
+`rust-release-check.yml` and `rust-publish-crates.yml`. Crates outside that
+allowlist must have `publish = false` in their `Cargo.toml`.
+
+Release repositories should configure release-plz in `release-plz.toml`.
+Developers and agents must not edit `CHANGELOG.md` manually; release-plz owns
+changelog updates in release PRs.
+
+These workflows install the pinned release-plz CLI version with
+`cargo install --locked release-plz --version ...` and use crates.io trusted
+publishing directly. Do not configure long-lived crates.io tokens for callers.
+
+Caller repositories should expose a local workflow named
+`.github/workflows/release-plz.yml`, pin these reusable workflows to a full
+commit SHA from `dusk-network/.github`, and configure the crates.io trusted
+publisher with:
+- repository: the caller repository, for example `dusk-network/curves`
+- workflow filename: `release-plz.yml`
+- environment: `crates-io`
+
+Example caller for `curves`:
+
+```yaml
+name: Release-plz
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: Release command to run
+        required: true
+        type: choice
+        options:
+          - release-pr
+          - publish
+        default: release-pr
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+jobs:
+  release_pr:
+    name: Create release PR
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.command == 'release-pr' }}
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: dusk-network/.github/.github/workflows/rust-release-plan.yml@<full_commit_sha>
+
+  release_check:
+    name: Validate release PR
+    if: ${{ github.event_name == 'pull_request' && startsWith(github.head_ref, 'release-plz-') }}
+    permissions:
+      contents: read
+      pull-requests: read
+    uses: dusk-network/.github/.github/workflows/rust-release-check.yml@<full_commit_sha>
+    with:
+      publish-packages: dusk-curves
+      workflow-scripts-ref: <full_commit_sha>
+
+  publish:
+    name: Publish crates
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.command == 'publish' }}
+    permissions:
+      contents: write
+      pull-requests: read
+      id-token: write
+    uses: dusk-network/.github/.github/workflows/rust-publish-crates.yml@<full_commit_sha>
+    with:
+      publish-packages: dusk-curves
+      environment: crates-io
+      workflow-scripts-ref: <full_commit_sha>
+```
+
 ## Toolchain And Cache
 
 To set the toolchain for the workflows, usage of `rust-toolchain.toml` is recommended. For certain channels, toolchain components like `clippy` and `rustfmt` are not available by default. This is problematic when using the `code_analysis` workflow. The following example config is therefore recommended:
