@@ -1,0 +1,62 @@
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: "Runner label or image"
+        required: false
+        type: string
+        default: ubuntu-latest
+      manifest-path:
+        description: "Path to the workspace or package Cargo.toml"
+        required: false
+        type: string
+        default: Cargo.toml
+      config:
+        description: "Path to release-plz.toml"
+        required: false
+        type: string
+        default: release-plz.toml
+      release-plz-version:
+        description: "release-plz binary version"
+        required: false
+        type: string
+        default: "0.3.157"
+
+name: Rust Release Plan
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release_pr:
+    name: Create or update release PR
+    runs-on: ${{ inputs.runner }}
+    if: ${{ github.repository_owner == 'dusk-network' }}
+    concurrency:
+      group: rust-release-plan-${{ github.repository }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install Rust toolchain
+        uses: dsherret/rust-toolchain-file@3551321aa44dd44a0393eb3b6bdfbc5d25ecf621 # v1
+
+      - name: Create or update release PR
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          MANIFEST_PATH: ${{ inputs.manifest-path }}
+          CONFIG: ${{ inputs.config }}
+          RELEASE_PLZ_VERSION: ${{ inputs.release-plz-version }}
+        run: |
+          set -euo pipefail
+          cargo install --locked release-plz --version "$RELEASE_PLZ_VERSION"
+          release-plz release-pr \
+            --git-token "$GITHUB_TOKEN" \
+            --manifest-path "$MANIFEST_PATH" \
+            --config "$CONFIG"
